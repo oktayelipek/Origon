@@ -1,0 +1,71 @@
+---
+title: Radio
+---
+
+import { Radio, RadioGroup } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Radio
+
+Single-choice input, always used inside a `<RadioGroup>` for state
+management + accessibility. Source: Figma `FK-Radio` (`12:54256`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [order, setOrder] = useState('limit');
+  const [pace, setPace] = useState('normal');
+  return (
+    <div style={{ display: 'flex', gap: 32, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <div>
+        <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Vertical</div>
+        <RadioGroup name="order" value={order} onChange={setOrder}>
+          <Radio value="limit" label="Limit order" />
+          <Radio value="market" label="Market order" />
+          <Radio value="stop" label="Stop-loss" />
+          <Radio value="oco" label="OCO" disabled />
+        </RadioGroup>
+      </div>
+      <div>
+        <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Horizontal, sizes</div>
+        <RadioGroup name="pace" value={pace} onChange={setPace} orientation="horizontal" size="large">
+          <Radio value="fast" label="Fast" />
+          <Radio value="normal" label="Normal" />
+          <Radio value="slow" label="Slow" />
+        </RadioGroup>
+      </div>
+    </div>
+  );
+};
+
+## API
+
+### RadioGroup
+
+<PropsTable rows={[
+  { name: 'name', type: 'string', description: 'HTML name shared by all radios in the group.' },
+  { name: 'value', type: 'string', description: 'Currently selected value.' },
+  { name: 'onChange', type: '(value: string) => void', description: 'Called with the new value on selection.' },
+  { name: 'orientation', type: '"vertical" | "horizontal"', defaultValue: '"vertical"' },
+  { name: 'size', type: '"small" | "medium" | "large"', defaultValue: '"medium"' },
+  { name: 'disabled', type: 'boolean', description: 'Disables all radios in the group.' },
+]} />
+
+### Radio
+
+<PropsTable rows={[
+  { name: 'value', type: 'string', description: 'Value matched against RadioGroup.value.' },
+  { name: 'label', type: 'ReactNode', description: 'Inline label rendered after the input.' },
+  { name: 'error', type: 'boolean', description: 'Shows red border. Useful for form validation.' },
+  { name: 'disabled', type: 'boolean', description: 'Overrides group disabled (per-radio disable).' },
+]} />
+
+## Accessibility
+
+- RadioGroup wraps with `role="radiogroup"` and forwards `aria-label`.
+- Each Radio is a native `<input type="radio">` — Tab lands on the group,
+  Arrow keys move between options (native behavior when `name` is shared).
+- `<label>` wraps the input so clicking the label toggles selection.

@@ -1,0 +1,171 @@
+---
+title: Theming
+---
+
+import { Tabs } from 'nextra/components';
+
+# Theming
+
+Origon UI ships **6 first-class themes** — Kripto, Hisse, and Global brands
+each in Dark and Light modes. Figma variable collection: `01-Color Tokens`
+(node `3393:141`).
+
+| Brand  | Dark | Light |
+| ---    | ---  | ---   |
+| Kripto | default | ✓ |
+| Hisse  | ✓    | ✓ |
+| Global | ✓    | ✓ |
+
+The default build (imported as `@origon/tokens-react`) resolves to **Kripto Dark**.
+Other variants ship as sub-path exports.
+
+## How themes are structured
+
+- **Primitives** (`colors`, `sizes`, `typography`) don't change across themes —
+  they are the raw palette + text scale + dimensions.
+- **Semantic tokens** (`semantic.button.primary`, `semantic.text.focus`,
+  `semantic.level.surface`, …) point to different primitives per brand × theme.
+- **Themed dimensions** (`spacing.*`, `radius.*`) currently resolve identically
+  in Dark and Light modes, but the pipeline supports per-theme overrides.
+
+## Runtime switching (React)
+
+Set data attributes on the root element and the CSS variables from
+`@origon/tokens-react/themes/css` automatically cascade:
+
+```tsx
+import '@origon/tokens-react/themes/css';
+import { applyTheme } from '@origon/tokens-react/themes';
+
+// Apply a brand + theme
+applyTheme('hisse', 'light');
+```
+
+Or set the attributes yourself:
+
+```html
+<html data-brand="hisse" data-theme="light">
+```
+
+Then reference tokens via CSS variables:
+
+```css
+.button-primary {
+  background: var(--semantic-button-primary);
+  color: var(--semantic-text-focus);
+}
+```
+
+## Compile-time selection (React)
+
+For SSR / server-render use cases, import a specific variant directly:
+
+```tsx
+import { tokens } from '@origon/tokens-react/themes/kripto-light';
+
+const buttonBg = tokens.semantic.button.primary;
+```
+
+Or use the map:
+
+```tsx
+import { themes, getTokens } from '@origon/tokens-react/themes';
+
+const t = getTokens('global', 'dark');
+console.log(t.semantic.button.primary);
+```
+
+## Values by variant
+
+<Tabs items={['Kripto Dark', 'Kripto Light', 'Hisse Dark', 'Hisse Light', 'Global Dark', 'Global Light']}>
+{[
+  ['kripto', 'dark'],
+  ['kripto', 'light'],
+  ['hisse', 'dark'],
+  ['hisse', 'light'],
+  ['global', 'dark'],
+  ['global', 'light'],
+].map(([b, t]) => (
+  <Tabs.Tab key={`${b}-${t}`}>
+    <p style={{ marginTop: 12 }}>
+      Sample tokens for <code>{b}</code> / <code>{t}</code>:
+    </p>
+    <table>
+      <thead><tr><th>Token</th><th>Value</th></tr></thead>
+      <tbody>
+        <tr><td><code>semantic.button.primary</code></td><td><code>see /themes/{b}-{t}</code></td></tr>
+        <tr><td><code>semantic.text.focus</code></td><td><code>see /themes/{b}-{t}</code></td></tr>
+        <tr><td><code>semantic.level.surface</code></td><td><code>see /themes/{b}-{t}</code></td></tr>
+      </tbody>
+    </table>
+  </Tabs.Tab>
+))}
+</Tabs>
+
+## Flutter
+
+`OrigonTheme` is an `InheritedWidget` — `OrigonTheme.of(context)` returns
+the active [OrigonThemeData] anywhere in the tree.
+
+```dart
+import 'package:origon_tokens/origon_tokens.dart';
+
+MaterialApp(
+  builder: (context, child) => OrigonTheme(
+    data: OrigonThemes.kriptoDark,   // or resolve at runtime:
+                                     // OrigonThemes.resolve(brand, mode)
+    child: child!,
+  ),
+);
+
+// Inside any widget:
+final theme = OrigonTheme.of(context);
+Container(color: theme.semantic.button.primary, ...);
+```
+
+Available modes: `OrigonThemes.kriptoDark`, `.kriptoLight`, `.hisseDark`,
+`.hisseLight`, `.globalDark`, `.globalLight`. Or use
+`OrigonThemes.resolve(brand, mode)` for dynamic lookup.
+
+## Swift
+
+SwiftUI `EnvironmentValues.origonTheme` provides the active theme. Set it
+once at the root with the `.origonTheme()` view modifier.
+
+```swift
+import OrigonTokens
+
+@main
+struct MyApp: App {
+    var body: some Scene {
+        WindowGroup {
+            ContentView()
+                .origonTheme(OrigonThemes.kriptoDark)
+        }
+    }
+}
+
+struct SomeView: View {
+    @Environment(\.origonTheme) var theme
+    var body: some View {
+        Text("Buy")
+            .background(theme.semantic.button.primary)
+    }
+}
+```
+
+Available: `OrigonThemes.kriptoDark`, `.kriptoLight`, `.hisseDark`,
+`.hisseLight`, `.globalDark`, `.globalLight`, or
+`OrigonThemes.resolve(_ brand:, _ mode:)`.
+
+## Roadmap
+
+- [x] Emit all 6 variants as React sub-path exports.
+- [x] Ship `themes.css` with scoped `[data-brand][data-theme]` selectors.
+- [x] `applyTheme(brand, theme)` runtime helper.
+- [x] Flutter `OrigonTheme` `InheritedWidget` provider.
+- [x] Swift `EnvironmentValues.origonTheme` value.
+- [x] Docs live-preview brand/theme switcher.
+- [ ] Migrate all 15 component ports to consume theme from context/environment
+  instead of static `OrigonSemantic.*` (currently only React uses runtime CSS
+  variables; Flutter/Swift still bind at import-time to Kripto Dark).

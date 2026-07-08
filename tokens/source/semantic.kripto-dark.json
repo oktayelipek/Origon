@@ -1,0 +1,167 @@
+{
+  "$description": "Origon UI — semantic color tokens (Kripto Dark). Product code should reference these, not primitives.",
+  "semantic": {
+    "text": {
+      "focus": {
+        "$value": "#f0f4f7",
+        "$type": "color"
+      },
+      "secondary": {
+        "$value": "#858fa6",
+        "$type": "color"
+      },
+      "tertiary": {
+        "$value": "#4c5d72",
+        "$type": "color"
+      }
+    },
+    "icon": {
+      "focus": {
+        "$value": "#f0f4f7",
+        "$type": "color"
+      },
+      "inactive": {
+        "$value": "#858fa6",
+        "$type": "color"
+      },
+      "disabled": {
+        "$value": "#4c5d72",
+        "$type": "color"
+      }
+    },
+    "level": {
+      "basement": {
+        "$value": "#070910",
+        "$type": "color"
+      },
+      "basementOpacity80": {
+        "$value": "#070910cc",
+        "$type": "color"
+      },
+      "surface": {
+        "$value": "#0b0f1a",
+        "$type": "color"
+      },
+      "surfaceOpacity80": {
+        "$value": "#0b0f1acc",
+        "$type": "color"
+      },
+      "surfaceOpacity0": {
+        "$value": "#0b0f1a00",
+        "$type": "color"
+      },
+      "elevation": {
+        "$value": "#131f2f",
+        "$type": "color"
+      },
+      "elevation1": {
+        "$value": "#17273a",
+        "$type": "color"
+      },
+      "elevation2": {
+        "$value": "#192f43",
+        "$type": "color"
+      },
+      "elevation3": {
+        "$value": "#21374a",
+        "$type": "color"
+      },
+      "elevation4": {
+        "$value": "#4c5d72",
+        "$type": "color"
+      }
+    },
+    "brand": {
+      "primary": {
+        "$value": "#005fae",
+        "$type": "color"
+      },
+      "primary10": {
+        "$value": "#005fae1a",
+        "$type": "color"
+      }
+    },
+    "inverse": {
+      "purewhite": {
+        "$value": "#ffffff",
+        "$type": "color"
+      },
+      "puredark": {
+        "$value": "#000000",
+        "$type": "color"
+      },
+      "swap": {
+        "$value": "#000000",
+        "$type": "color"
+      },
+      "focus": {
+        "$value": "#ffffff",
+        "$type": "color"
+      }
+    },
+    "actions": {
+      "action01": {
+        "$value": "#4fa963",
+        "$type": "color"
+      },
+      "action0120": {
+        "$value": "#4fa96333",
+        "$type": "color"
+      },
+      "action02": {
+        "$value": "#e93a40",
+        "$type": "color"
+      },
+      "action0220": {
+        "$value": "#e93a4033",
+        "$type": "color"
+      },
+      "action03": {
+        "$value": "#ffac2b",
+        "$type": "color"
+      },
+      "action0320": {
+        "$value": "#ffac2b33",
+        "$type": "color"
+      },
+      "gradients": {
+        "gradient01": {
+          "$value": "#15ed45",
+          "$type": "color"
+        },
+        "gradient02": {
+          "$value": "#b32b31",
+          "$type": "color"
+        }
+      }
+    },
+    "button": {
+      "buy": {
+        "$value": "#48aa5c",
+        "$type": "color"
+      },
+      "sell": {
+        "$value": "#b32b31",
+        "$type": "color"
+      }
+    },
+    "debug": {
+      "undefined": {
+        "$value": "#c5ff00",
+        "$type": "color"
+      }
+    },
+    "dedicated": {
+      "overlay": {
+        "$value": "#000000d9",
+        "$type": "color"
+      }
+    },
+    "sectionBg": {
+      "undefined": {
+        "$value": "#000000",
+        "$type": "color"
+      }
+    }
+  }
+}

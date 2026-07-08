@@ -1,0 +1,126 @@
+---
+title: Chip
+---
+
+import { Tabs } from 'nextra/components';
+import { Chip } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Chip
+
+Compact rounded label. Two roles:
+
+- **Display** — static pill for tags, categories, metadata. Line or solid.
+- **Selector** — interactive toggle for period pickers, filter values.
+
+Source: Figma `Chip` (`12:86248`) and `Chip [Selector]` (`12:86235`).
+
+## Live preview — display
+
+<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Chip size="lg">Large</Chip>
+  <Chip size="md">Medium</Chip>
+  <Chip size="sm">Small</Chip>
+  <Chip size="xs">XS</Chip>
+</div>
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Chip variant="line">Line</Chip>
+  <Chip variant="solid">Solid</Chip>
+</div>
+
+## Live preview — selector
+
+<SelectorDemo />
+
+export const SelectorDemo = () => {
+  const [period, setPeriod] = useState('1 Gün');
+  const options = ['1 Gün', '1 Hafta', '1 Ay', '3 Ay', '1 Yıl'];
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      {options.map((opt) => (
+        <Chip key={opt} size="xs" selected={period === opt} onSelect={() => setPeriod(opt)}>
+          {opt}
+        </Chip>
+      ))}
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'size', type: '"xs" | "sm" | "md" | "lg"', defaultValue: '"md"', description: 'XS = 20px (selector), Sm = 30px, Md = 38px, Lg = 46px.' },
+  { name: 'variant', type: '"line" | "solid"', defaultValue: '"line"', description: 'Display mode: line = outlined, solid = tinted fill. Ignored when interactive.' },
+  { name: 'selected', type: 'boolean', description: 'When defined, chip becomes an interactive selector (rendered as <button role="switch">).' },
+  { name: 'onSelect', type: '(next: boolean) => void', description: 'Called on click when interactive.' },
+  { name: 'icon', type: 'ReactNode', description: 'Optional leading icon.' },
+  { name: 'children', type: 'ReactNode', description: 'Chip label.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Chip } from '@origon/react';
+
+// Display
+<Chip size="sm" variant="solid">BTC</Chip>
+
+// Selector
+const [range, setRange] = useState('1D');
+<Chip size="xs" selected={range === '1D'} onSelect={() => setRange('1D')}>
+  1 Gün
+</Chip>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+// Display
+const OrigonChip(child: Text('BTC'), size: OrigonChipSize.sm, variant: OrigonChipVariant.solid);
+
+// Selector
+OrigonChip(
+  child: Text(period),
+  size: OrigonChipSize.xs,
+  selected: period == '1D',
+  onSelect: (v) => setState(() => period = v ? '1D' : period),
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+// Display
+OrigonChip(size: .sm, variant: .solid) { Text("BTC") }
+
+// Selector
+@State var isSelected = false
+OrigonChip(selected: $isSelected) { Text("1 Gün") }
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Anatomy
+
+- Corner radius `xxl` (28) — pill shape at all sizes.
+- Padding scales with size: X-Small uses `spacing.xs / xxs`, Large uses `spacing.4xl / md`.
+- Selector uses `semantic.button.primary` for selected background,
+  `colors.blueGray[300]` outline for unselected.
+
+## Accessibility
+
+- Display chips render as `<span>` — decorative.
+- Selector chips render as `<button role="switch" aria-checked>` — keyboard
+  focusable, announced with state.

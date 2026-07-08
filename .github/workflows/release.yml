@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+# Prevent overlapping releases.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write        # For git tag + CHANGELOG commit
+  issues: write          # For issue comments
+  pull-requests: write   # For PR comments
+  id-token: write        # For provenance if npm publish
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    # Skip release when the last commit was the release commit itself.
+    if: |
+      !contains(github.event.head_commit.message, 'chore(release):') &&
+      !contains(github.event.head_commit.message, '[skip ci]')
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # semantic-release needs full history to compute next version.
+          fetch-depth: 0
+          # Use GITHUB_TOKEN so the release-generated commit doesn't loop CI.
+          persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Build tokens
+        run: pnpm build:tokens
+
+      - name: Test — React
+        run: pnpm --filter @origon/react test
+
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HUSKY: 0
+        run: pnpm release

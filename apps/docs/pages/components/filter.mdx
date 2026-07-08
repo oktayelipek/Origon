@@ -1,0 +1,111 @@
+---
+title: Filter
+---
+
+import { Tabs } from 'nextra/components';
+import { Filter, SortFilter } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Filter
+
+Compact pill buttons used above data tables and list views. Source: Figma
+`Header Filter`, `Header Filter [Icons]`, `Sort Filter` (page `12:84954`).
+
+Two variants:
+- **Filter** — labelled dropdown trigger with an optional dismiss button.
+- **SortFilter** — column sort toggle (asc / desc / unsorted).
+
+Dropdown behavior itself is provided by the [Dropdown](/components/dropdown)
+component; Filter is just the trigger surface.
+
+## Live preview
+
+export const Coin = ({ c }) => (
+  <span style={{ display: 'block', width: '100%', height: '100%', background: c }} />
+);
+
+<Demo />
+
+export const Demo = () => {
+  const [pair, setPair] = useState('BTC');
+  const [dir, setDir] = useState('desc');
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 8, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <Filter label="Pair" value={pair} onDismiss={() => setPair(null)} onClick={() => alert('open picker')} />
+      <Filter label="Currency" value="+3" leadingIcons={[<Coin c="#f0ae67" />, <Coin c="#dc3323" />, <Coin c="#5384d1" />]} onDismiss={() => {}} />
+      <Filter label="Type" onClick={() => alert('open picker')} />
+      <SortFilter label="Volume" direction={dir} onClick={() => setDir(dir === 'asc' ? 'desc' : 'asc')} />
+      <SortFilter label="Change" direction={null} onClick={() => {}} />
+    </div>
+  );
+};
+
+## API — Filter
+
+<PropsTable rows={[
+  { name: 'label', type: 'string', description: 'Filter name (rendered before the ":").' },
+  { name: 'value', type: 'ReactNode', description: 'Current filter value.' },
+  { name: 'leadingIcons', type: 'ReactNode[]', description: 'Optional stack of icons (e.g., token avatars) shown to the left of the value. Icons overlap by 6px.' },
+  { name: 'onDismiss', type: '() => void', description: 'When provided, shows a trailing × button that clears the filter.' },
+]} />
+
+## API — SortFilter
+
+<PropsTable rows={[
+  { name: 'label', type: 'string', description: 'Column name.' },
+  { name: 'direction', type: '"asc" | "desc" | null', defaultValue: 'null', description: 'Current sort direction. null = unsorted (bidirectional arrows).' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Filter, SortFilter } from '@origon/react';
+
+<Filter
+  label="Pair"
+  value={selectedPair ?? 'All'}
+  onDismiss={selectedPair ? () => setSelectedPair(null) : undefined}
+  onClick={openPairPicker}
+/>
+
+<SortFilter label="Volume" direction={sortDir} onClick={toggleSort} />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonFilter(
+  label: 'Pair',
+  value: Text(selectedPair ?? 'All'),
+  onDismiss: selectedPair != null ? () => setState(() => selectedPair = null) : null,
+  onTap: openPairPicker,
+);
+
+OrigonSortFilter(label: 'Volume', direction: sortDir, onTap: toggleSort);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonFilter(
+    label: "Pair",
+    value: selectedPair ?? "All",
+    onTap: { openPairPicker() },
+    onDismiss: selectedPair != nil ? { selectedPair = nil } : nil
+)
+
+OrigonSortFilter(label: "Volume", direction: sortDir, onTap: toggleSort)
+```
+
+</Tabs.Tab>
+</Tabs>

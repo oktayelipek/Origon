@@ -1,0 +1,118 @@
+---
+title: MultiLine Input
+---
+
+import { Tabs } from 'nextra/components';
+import { MultiLineInput } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# MultiLine Input
+
+Textarea variant of `<Input>`. Source: Figma `FKInput` Feature=Multi Line
+(`12:68514`). Optional auto-resize + character counter.
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [notes, setNotes] = useState('');
+  const [msg, setMsg] = useState('');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 480 }}>
+      <MultiLineInput
+        label="Order notes"
+        placeholder="Anything worth noting…"
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        rows={3}
+        fullWidth
+      />
+      <MultiLineInput
+        label="Feedback (auto-grows)"
+        placeholder="Type more to see it grow"
+        value={msg}
+        onChange={(e) => setMsg(e.target.value)}
+        rows={2}
+        maxRows={8}
+        autoResize
+        showCounter
+        maxLength={280}
+        fullWidth
+      />
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'rows', type: 'number', defaultValue: '3', description: 'Minimum visible rows.' },
+  { name: 'autoResize', type: 'boolean', defaultValue: 'false', description: 'Grow as content increases, up to maxRows.' },
+  { name: 'maxRows', type: 'number', defaultValue: '8', description: 'Ceiling for autoResize.' },
+  { name: 'showCounter', type: 'boolean', defaultValue: 'false', description: 'Show a x / maxLength counter under the field.' },
+  { name: 'maxLength', type: 'number', description: 'Native HTML length limit + counter denominator.' },
+  { name: 'label', type: 'string', description: 'Field label above.' },
+  { name: 'hint', type: 'string', description: 'Helper text below.' },
+  { name: 'error', type: 'string', description: 'Error message + aria-invalid.' },
+]} />
+
+Also accepts every native `<textarea>` attribute.
+
+## Cross-platform
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { MultiLineInput } from '@origon/react';
+
+<MultiLineInput
+  label="Notes"
+  value={notes}
+  onChange={(e) => setNotes(e.target.value)}
+  autoResize
+  maxRows={6}
+  showCounter
+  maxLength={500}
+/>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonMultiLineInput(
+  label: 'Notes',
+  controller: _notesCtrl,
+  autoResize: true,
+  maxRows: 6,
+  showCounter: true,
+  maxLength: 500,
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+@State private var notes = ""
+
+OrigonMultiLineInput(
+    text: $notes,
+    label: "Notes",
+    rows: 3,
+    maxRows: 6,
+    autoResize: true,
+    showCounter: true,
+    maxLength: 500
+)
+```
+
+</Tabs.Tab>
+</Tabs>

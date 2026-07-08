@@ -1,0 +1,49 @@
+---
+title: Range Slider
+---
+
+import { RangeSlider } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Range Slider
+
+Single- or dual-thumb slider. Pass `value={n}` for single, `value={[a, b]}`
+for dual. Source: Figma `- Range Selector` (`12:54109`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [single, setSingle] = useState(35);
+  const [range, setRange] = useState([20, 80]);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 32, padding: 32, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 480 }}>
+      <RangeSlider label={`Single thumb: ${single}%`} value={single} onChange={setSingle} showLabels />
+      <RangeSlider label={`Dual thumb: ${range[0]} — ${range[1]}`} value={range} onChange={setRange} showLabels />
+      <RangeSlider label="Disabled" value={40} onChange={() => {}} disabled />
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'value', type: 'number | [number, number]', description: 'Single value or [low, high] pair. Type controls single vs dual.' },
+  { name: 'onChange', type: '(v) => void', description: 'Called with the same shape as `value`.' },
+  { name: 'min', type: 'number', defaultValue: '0' },
+  { name: 'max', type: 'number', defaultValue: '100' },
+  { name: 'step', type: 'number', defaultValue: '1' },
+  { name: 'showLabels', type: 'boolean', defaultValue: 'false', description: 'Show min/current/max labels under the track.' },
+  { name: 'formatValue', type: '(v: number) => string', description: 'Format the values in labels + aria-valuetext.' },
+  { name: 'disabled', type: 'boolean' },
+  { name: 'label', type: 'string', description: 'Header label above the track (also used as aria-label).' },
+]} />
+
+## Behavior
+
+- Track click moves the nearest thumb.
+- Pointer events (mouse/touch) for drag.
+- Each thumb has `role="slider"` + `aria-valuemin/max/now/valuetext`.
+- Arrow key handling is on the v4 roadmap.

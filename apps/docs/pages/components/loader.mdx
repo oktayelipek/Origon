@@ -1,0 +1,107 @@
+---
+title: Loader
+---
+
+import { Tabs } from 'nextra/components';
+import { Loader } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Loader
+
+Indeterminate loading indicator. Source: Figma component set `FK-Loader`
+(node `12:58010`). Rendered as a 12-petal SVG that pulses each petal in
+sequence (~1s cycle), producing a wave motion.
+
+## Live preview
+
+<div style={{ display: 'flex', alignItems: 'flex-end', gap: 32, padding: 32, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <div style={{ textAlign: 'center' }}>
+    <Loader size="xx-small" />
+    <div style={{ fontSize: 11, opacity: 0.6, marginTop: 8 }}>xx-small</div>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <Loader size="small" />
+    <div style={{ fontSize: 11, opacity: 0.6, marginTop: 8 }}>small</div>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <Loader size="medium" />
+    <div style={{ fontSize: 11, opacity: 0.6, marginTop: 8 }}>medium</div>
+  </div>
+  <div style={{ textAlign: 'center' }}>
+    <Loader size="large" />
+    <div style={{ fontSize: 11, opacity: 0.6, marginTop: 8 }}>large</div>
+  </div>
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'size', type: '"xx-small" | "small" | "medium" | "large"', defaultValue: '"medium"', description: 'Dimensions: 8×11, 24×33, 32×44, 44×60 (w×h in px).' },
+  { name: 'label', type: 'string', defaultValue: '"Loading"', description: 'Screen reader announcement — provided via aria-label.' },
+]} />
+
+Also forwards any `<span>` HTML attributes.
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Loader } from '@origon/react';
+
+// In a button while an action is pending:
+<Button disabled>
+  <Loader size="small" /> Confirming…
+</Button>
+
+// As a full-page indicator:
+<Loader size="large" label="Fetching portfolio" />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+// Inside a Row while waiting for a network call:
+OrigonLoader(size: OrigonLoaderSize.small);
+
+// Full-page indicator with an announcement:
+OrigonLoader(
+  size: OrigonLoaderSize.large,
+  semanticsLabel: 'Fetching portfolio',
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+// Compact size for row context:
+OrigonLoader(size: .small)
+
+// Full-screen with custom label:
+OrigonLoader(size: .large, label: "Fetching portfolio")
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Accessibility
+
+- Rendered as `role="progressbar"` with `aria-label` (default: "Loading").
+- `aria-live="polite"` — screen readers announce presence but don't interrupt.
+- Prefers-reduced-motion is **not** yet respected; a static frame will be shown
+  in a future revision.
+
+## Do / don't
+
+- ✅ Use `size="small"` inside buttons and rows.
+- ✅ Use `size="large"` for full-view loading states.
+- ❌ Don't use for determinate progress — use a Progress component instead
+  (coming later).
+- ❌ Don't wrap in another animation — the wave motion is deliberate.

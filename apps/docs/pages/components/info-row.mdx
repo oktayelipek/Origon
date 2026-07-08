@@ -1,0 +1,129 @@
+---
+title: Info Row
+---
+
+import { Tabs } from 'nextra/components';
+import { InfoRow } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Info Row
+
+Inline status / notification row for surfacing messages within a screen (not a
+toast — Toast is a separate ephemeral component). Source: Figma
+`FK-InfoRow` (node `12:73137`) — 48 variants across Type, Presence, Tone,
+and Boxed axes.
+
+## Live preview
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <InfoRow tone="info" message="Portfolio was updated 3 minutes ago." icon={<Icon name="info" />} />
+  <InfoRow tone="focus" message="You have 2 pending orders awaiting confirmation." icon={<Icon name="star" />} onDismiss={() => {}} />
+  <InfoRow tone="caution" message="Trade fees will change on July 15." icon={<Icon name="alert" />} />
+  <InfoRow tone="warning" message="This action cannot be undone." icon={<Icon name="warn" />} />
+</div>
+
+### Presence: high
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <InfoRow tone="info" presence="high" message="Full-emphasis info variant." />
+  <InfoRow tone="focus" presence="high" message="Full-emphasis focus variant." />
+  <InfoRow tone="caution" presence="high" message="Full-emphasis caution variant." />
+  <InfoRow tone="warning" presence="high" message="Full-emphasis warning variant." />
+</div>
+
+### Boxed=false (inline, no chrome)
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 4, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <InfoRow tone="info" boxed={false} message="Inline message without a container." />
+  <InfoRow tone="caution" boxed={false} message="Another borderless line." />
+</div>
+
+export const Icon = ({ name }) => {
+  const paths = {
+    info: 'M12 8v4M12 16h.01M12 3a9 9 0 100 18 9 9 0 000-18z',
+    star: 'M12 2l3 7 7 .5-5.5 4.8L18 22l-6-3.6L6 22l1.5-7.7L2 9.5 9 9z',
+    alert: 'M12 9v4M12 17h.01M4.5 20h15L12 4z',
+    warn: 'M12 8v4M12 16h.01M4.5 20h15L12 4z',
+  };
+  return (
+    <svg viewBox="0 0 24 24" width="100%" height="100%" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d={paths[name] || paths.info} />
+    </svg>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'message', type: 'ReactNode', description: 'Body of the row.' },
+  { name: 'tone', type: '"info" | "focus" | "caution" | "warning"', defaultValue: '"info"', description: 'Semantic color family.' },
+  { name: 'presence', type: '"low" | "high"', defaultValue: '"low"', description: 'Low = subtle (tinted bg + colored text). High = solid tone bg with contrasting text.' },
+  { name: 'boxed', type: 'boolean', defaultValue: 'true', description: 'When true, adds 1px border and 12px radius. When false, renders inline without chrome.' },
+  { name: 'icon', type: 'ReactNode', description: 'Leading icon (usually an SVG).' },
+  { name: 'onDismiss', type: '() => void', description: 'When provided, shows a trailing close button.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { InfoRow } from '@origon/react';
+
+<InfoRow
+  tone="warning"
+  message="This action cannot be undone."
+  icon={<AlertIcon />}
+  onDismiss={() => setShown(false)}
+/>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonInfoRow(
+  message: const Text('This action cannot be undone.'),
+  tone: OrigonInfoRowTone.warning,
+  icon: const Icon(Icons.warning_amber_outlined),
+  onDismiss: () => setState(() => shown = false),
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonInfoRow(
+    message: "This action cannot be undone.",
+    tone: .warning,
+    onDismiss: { shown = false }
+) {
+    Image(systemName: "exclamationmark.triangle")
+}
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Accessibility
+
+- Rendered as `role="status" aria-live="polite"` — screen readers announce
+  when the row mounts, but don't interrupt.
+- Dismiss button carries `aria-label="Dismiss"`.
+- Content color contrast is validated against WCAG AA at both `presence`
+  levels for all tones.
+
+## Do / don't
+
+- ✅ Use `presence="high"` sparingly — reserve for critical messages that
+  demand attention.
+- ✅ Use `tone="warning"` only for destructive or risky actions.
+- ❌ Don't use InfoRow for validation errors on a specific field — use
+  Input's error state instead.
+- ❌ Don't stack more than 2 InfoRows in a view — noise.

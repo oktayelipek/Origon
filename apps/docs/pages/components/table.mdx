@@ -1,0 +1,75 @@
+---
+title: Table
+---
+
+import { Table, Graph } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Table
+
+Data grid with sortable headers, hover rows, alignment control. For very
+large datasets (>1k rows) integrate a virtualized library; this primitive
+covers portfolio/order lists and admin tables. Source: Figma `{FK-Table}`
+(`12:48775`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const rows = [
+    { symbol: 'BTC', price: 3458000, change: 2.4, series: [10, 11, 13, 12, 14, 15, 17] },
+    { symbol: 'ETH', price: 124800,  change: -1.1, series: [22, 20, 21, 19, 18, 17, 16] },
+    { symbol: 'SOL', price: 2190,    change: 5.3, series: [5, 6, 5, 7, 8, 9, 11] },
+    { symbol: 'AVAX', price: 785,    change: 3.2, series: [12, 13, 12, 14, 14, 15, 16] },
+    { symbol: 'ADA', price: 13.42,   change: -0.8, series: [8, 8, 7, 7, 6, 6, 5] },
+  ];
+  const [sort, setSort] = useState({ key: 'price', direction: 'desc' });
+  const sorted = [...rows].sort((a, b) => {
+    const av = a[sort.key], bv = b[sort.key];
+    if (av == null || bv == null) return 0;
+    return sort.direction === 'asc' ? (av > bv ? 1 : -1) : (av < bv ? 1 : -1);
+  });
+  return (
+    <div style={{ padding: 16, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <Table
+        rows={sorted}
+        getRowKey={(r) => r.symbol}
+        sortBy={sort}
+        onSort={(key) => setSort((s) => ({ key, direction: s.key === key && s.direction === 'desc' ? 'asc' : 'desc' }))}
+        onRowClick={(r) => alert(r.symbol)}
+        columns={[
+          { key: 'symbol', header: 'Pair', render: (r) => <b>{r.symbol}/TRY</b>, sortable: true },
+          { key: 'price', header: 'Price', align: 'right', render: (r) => `₺${r.price.toLocaleString('tr-TR')}`, sortable: true },
+          { key: 'change', header: '24h', align: 'right', render: (r) => (
+            <span style={{ color: r.change >= 0 ? '#4fa963' : '#dc3323' }}>
+              {r.change >= 0 ? '+' : ''}{r.change}%
+            </span>
+          ), sortable: true },
+          { key: 'chart', header: 'Chart', align: 'right', width: 130, render: (r) => <Graph data={r.series} width={110} height={28} /> },
+        ]}
+      />
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'columns', type: 'TableColumn[]', description: 'Column defs. Each has key, header, render, optional align/width/sortable.' },
+  { name: 'rows', type: 'T[]', description: 'Data rows.' },
+  { name: 'getRowKey', type: '(row, i) => string', description: 'Stable row key for reconciliation.' },
+  { name: 'sortBy', type: '{ key, direction }', description: 'Current sort state — parent-managed.' },
+  { name: 'onSort', type: '(key: string) => void', description: 'Called on header click for sortable columns.' },
+  { name: 'onRowClick', type: '(row) => void', description: 'When set, rows become interactive with hover state.' },
+  { name: 'emptyState', type: 'ReactNode', description: 'Content when rows is empty. Default: "No data".' },
+  { name: 'dense', type: 'boolean', defaultValue: 'false', description: 'Reduced cell padding.' },
+]} />
+
+## Accessibility
+
+- Uses semantic `<table>` / `<thead>` / `<tbody>` with `scope="col"` headers.
+- Sortable headers carry `aria-sort` = `"ascending"` / `"descending"` / `"none"`.
+- Row clicks are exposed via `onclick` on the row — for stricter a11y, wrap
+  the row content in a button and lift the interactive concern.

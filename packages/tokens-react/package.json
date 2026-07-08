@@ -1,0 +1,22 @@
+{
+  "name": "@origon/tokens-react",
+  "version": "0.0.0",
+  "description": "Origon UI design tokens for React / TypeScript (generated).",
+  "type": "module",
+  "main": "./src/generated/index.ts",
+  "types": "./src/generated/index.ts",
+  "exports": {
+    ".": "./src/generated/index.ts",
+    "./css": "./src/generated/colors.css",
+    "./themes": "./src/generated/themes/index.ts",
+    "./themes/css": "./src/generated/themes/themes.css",
+    "./themes/kripto-dark": "./src/generated/themes/kripto-dark.ts",
+    "./themes/kripto-light": "./src/generated/themes/kripto-light.ts",
+    "./themes/hisse-dark": "./src/generated/themes/hisse-dark.ts",
+    "./themes/hisse-light": "./src/generated/themes/hisse-light.ts",
+    "./themes/global-dark": "./src/generated/themes/global-dark.ts",
+    "./themes/global-light": "./src/generated/themes/global-light.ts"
+  },
+  "files": ["src/generated"],
+  "sideEffects": ["*.css"]
+}

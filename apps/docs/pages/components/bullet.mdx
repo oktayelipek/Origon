@@ -1,0 +1,96 @@
+---
+title: Bullet
+---
+
+import { Tabs } from 'nextra/components';
+import { Bullet } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Bullet
+
+Step / pagination indicator. Source: Figma `Bullet [Line]` (`8:837`) and
+`Bullet [Dots]` (`8:866`). Two visual variants, arbitrary count, one active
+index. Typically used for onboarding steps, carousels, and paged wizards.
+
+## Live preview
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <div>
+    <div style={{ fontSize: 11, opacity: 0.6, marginBottom: 8 }}>variant="dots"</div>
+    <Bullet variant="dots" count={5} active={2} />
+  </div>
+  <div>
+    <div style={{ fontSize: 11, opacity: 0.6, marginBottom: 8 }}>variant="line"</div>
+    <Bullet variant="line" count={3} active={0} />
+  </div>
+</div>
+
+### Different counts
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  {[2, 3, 4, 5, 6, 8].map((n) => (
+    <div key={n} style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+      <code style={{ fontSize: 11, opacity: 0.6, width: 60 }}>count={n}</code>
+      <Bullet variant="dots" count={n} active={Math.floor(n / 2)} />
+    </div>
+  ))}
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'variant', type: '"line" | "dots"', defaultValue: '"dots"', description: 'Line = 40×4 bars (radius pill). Dots = 8×8 circles.' },
+  { name: 'count', type: 'number', description: 'Total number of steps.' },
+  { name: 'active', type: 'number', description: 'Zero-based index of the current step.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Bullet } from '@origon/react';
+
+<Bullet variant="line" count={3} active={currentStep} />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonBullet(
+  count: 3,
+  active: currentStep,
+  variant: OrigonBulletVariant.line,
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonBullet(count: 3, active: currentStep, variant: .line)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Anatomy
+
+- **Container** — horizontal flex row, gap `spacing.xs` (8px).
+- **Item** — a pill (radius `xxl`): 40×4 for line, 8×8 for dots.
+- **Colors** — active = `semantic.text.focus`, inactive = `colors.blueGray.300`.
+
+## Accessibility
+
+- Rendered as `role="tablist"` with `aria-label` describing progress (`Step N of M`).
+- The active item carries `aria-current="step"`.
+- Bullet is decorative-only when count/active reflect other primary UI —
+  screen reader users typically already know their position from the current
+  screen's context.

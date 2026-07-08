@@ -1,0 +1,93 @@
+---
+title: Graph
+---
+
+import { Tabs } from 'nextra/components';
+import { Graph } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Graph
+
+Compact sparkline for row and card contexts. Distinct from
+[Chart](/components/chart) — no axes or grid; single series only; auto-
+colored by trend direction (green up, red down). Source: Figma
+`- Graph` (`12:84746`).
+
+## Live preview
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, color: '#f0f4f7' }}>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4 }}>Up trend</div>
+    <Graph data={[10, 12, 11, 15, 14, 18, 20]} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4 }}>Down trend</div>
+    <Graph data={[22, 20, 24, 18, 15, 13, 10]} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4 }}>No fill</div>
+    <Graph data={[10, 15, 12, 18, 14, 22, 19, 25]} showFill={false} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 4 }}>Custom color</div>
+    <Graph data={[10, 12, 11, 13, 15, 14, 18]} color="#5384d1" />
+  </div>
+</div>
+
+## Usage — inline with values
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 8, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, color: '#f0f4f7' }}>
+  {[
+    { pair: 'BTC/TRY', change: '+2.4%', trend: 'up', data: [10, 12, 11, 15, 14, 18, 20] },
+    { pair: 'ETH/TRY', change: '-1.1%', trend: 'down', data: [22, 20, 24, 18, 15, 13, 10] },
+    { pair: 'SOL/TRY', change: '+5.3%', trend: 'up', data: [8, 9, 12, 15, 18, 22, 26] },
+  ].map((row) => (
+    <div key={row.pair} style={{ display: 'grid', gridTemplateColumns: '80px 1fr 60px', alignItems: 'center', gap: 12, padding: '8px 12px', background: 'var(--semantic-level-elevation, #131f2f)', borderRadius: 8 }}>
+      <span style={{ fontFamily: 'monospace' }}>{row.pair}</span>
+      <Graph data={row.data} width={120} height={30} />
+      <span style={{ textAlign: 'right', color: row.trend === 'up' ? '#4fa963' : '#dc3323' }}>{row.change}</span>
+    </div>
+  ))}
+</div>
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Graph } from '@origon/react';
+
+<Graph data={priceHistory} width={120} height={32} />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonGraph(data: priceHistory, width: 120, height: 32);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonGraph(data: priceHistory, width: 120, height: 32)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## API
+
+<PropsTable rows={[
+  { name: 'data', type: 'number[]', description: 'Series values. Domain and range auto-computed.' },
+  { name: 'width', type: 'number', defaultValue: '120' },
+  { name: 'height', type: 'number', defaultValue: '40' },
+  { name: 'color', type: 'string', description: 'Override auto trend color.' },
+  { name: 'showFill', type: 'boolean', defaultValue: 'true', description: 'Fill the area below the line at 16% alpha.' },
+]} />

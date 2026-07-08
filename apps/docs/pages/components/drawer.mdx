@@ -1,0 +1,102 @@
+---
+title: Drawer
+---
+
+import { Tabs } from 'nextra/components';
+import { Drawer, Button } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Drawer
+
+Overlay panel — bottom sheet on mobile, right rail on desktop. Source: Figma
+`Drawer` (page `12:86222`). Portals into `document.body`, adds a semi-opaque
+backdrop, and traps `Escape` to close.
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [bottom, setBottom] = useState(false);
+  const [side, setSide] = useState(false);
+  return (
+    <div style={{ display: 'flex', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <Button variant="outline" onClick={() => setBottom(true)}>Open bottom drawer</Button>
+      <Button variant="outline" onClick={() => setSide(true)}>Open side drawer</Button>
+      <Drawer open={bottom} onClose={() => setBottom(false)} side="bottom" aria-label="Filters">
+        <h3 style={{ margin: 0, marginBottom: 12 }}>Filters</h3>
+        <p style={{ opacity: 0.7 }}>Bottom sheet with a grab handle. Press Escape or tap the backdrop to close.</p>
+        <Button onClick={() => setBottom(false)}>Done</Button>
+      </Drawer>
+      <Drawer open={side} onClose={() => setSide(false)} side="right" aria-label="Details">
+        <h3 style={{ margin: 0, marginBottom: 12 }}>Details</h3>
+        <p style={{ opacity: 0.7 }}>Side drawer — 400px wide on desktop, full-width on mobile.</p>
+        <Button variant="outline" onClick={() => setSide(false)}>Close</Button>
+      </Drawer>
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'open', type: 'boolean', description: 'Controlled open state.' },
+  { name: 'onClose', type: '() => void', description: 'Called when the user requests close (Escape key or backdrop click).' },
+  { name: 'side', type: '"bottom" | "right"', defaultValue: '"bottom"', description: 'Which edge the drawer slides in from.' },
+  { name: 'showHandle', type: 'boolean', defaultValue: 'true', description: 'Grab handle at the top (bottom drawers only).' },
+  { name: 'children', type: 'ReactNode', description: 'Drawer contents.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Drawer } from '@origon/react';
+
+<Drawer open={open} onClose={() => setOpen(false)} side="bottom" aria-label="Filters">
+  <FilterList />
+</Drawer>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+// Drawer is presented via a function call rather than a widget.
+onPressed: () => showOrigonDrawer(
+  context: context,
+  side: OrigonDrawerSide.bottom,
+  semanticLabel: 'Filters',
+  child: FilterList(),
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+@State var isOpen = false
+
+Button("Open") { isOpen = true }
+    .origonDrawer(isPresented: $isOpen, side: .bottom) {
+        FilterList()
+    }
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Behavior
+
+- Body scroll is locked while open.
+- Escape closes.
+- Backdrop click closes.
+- Portal target is `document.body` — z-index 999 (backdrop), 1000 (panel).
+- Animations: 220ms cubic-bezier slide, 160ms fade for backdrop.

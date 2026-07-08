@@ -1,0 +1,165 @@
+---
+title: Colors
+---
+
+import { Tabs } from 'nextra/components';
+import { ColorScale, ColorTile } from '../../components/ColorSwatch';
+
+# Colors
+
+Origon UI colors are split into three layers:
+
+1. **Base** — pure white and black.
+2. **Primitive scales** — neutrals and accents on the canonical 50 → 900 steps.
+3. **Brand scales** — Kripto and Hisse (more brands to come).
+
+A **semantic layer** (`text.primary`, `surface.background`, `border.focus`, …)
+sits on top of these primitives and is defined per product. Semantic tokens
+are not yet imported from Figma — track that work in the roadmap.
+
+## Base
+
+<div style={{ display: 'flex', gap: 12, marginBottom: 24 }}>
+  <ColorTile name="base.white" label="base.white" />
+  <ColorTile name="base.black" label="base.black" />
+</div>
+
+## Neutrals
+
+<ColorScale name="blueGray" label="blueGray — cool, product-canvas neutrals" />
+<ColorScale name="coolGray" label="coolGray" />
+<ColorScale name="midGray" label="midGray" />
+<ColorScale name="neutralGray" label="neutralGray" />
+
+## Accents
+
+<ColorScale name="green" />
+<ColorScale name="lime" />
+<ColorScale name="forest" />
+<ColorScale name="teal" />
+<ColorScale name="midnightTeal" label="midnightTeal — inverted scale (50 is lightest reading)" />
+<ColorScale name="cyan" />
+<ColorScale name="blue" />
+<ColorScale name="violet" />
+<ColorScale name="red" />
+<ColorScale name="amber" />
+<ColorScale name="yellow" />
+
+## Brand
+
+<ColorScale name="brand.kripto" label="brand.kripto" />
+<ColorScale name="brand.hisse" label="brand.hisse" />
+
+## Semantic aliases
+
+Semantic tokens map to primitives, and are what product code should use. First
+imports from the Button page:
+
+| Alias | Resolves to | Purpose |
+| --- | --- | --- |
+| `text.reverse` | `blueGray.50` (#070910) | Text on light surfaces |
+| `text.secondary` | `coolGray.500` (#858fa6) | Muted / secondary text |
+| `text.disable` | `blueGray.400` (#192f43) | Disabled text |
+| `button.primary` | `brand.kripto.600` (#005fae) | Default action |
+| `button.secondary` | `blueGray.200` (#131f2f) | Secondary action |
+| `button.focus` | `coolGray.50` (#f0f4f7) | Focus ring / hover surface |
+| `border.level-2` | `blueGray.200` | Subtle border |
+| `border.level-4` | `blueGray.400` | Medium border |
+| `border.level-5` | `blueGray.500` | Strong border |
+
+Access in code:
+
+```tsx
+import { semantic } from '@origon/tokens-react';
+
+<button style={{ background: semantic.button.primary, color: semantic.text.baseWhite }}>
+  Buy
+</button>
+```
+
+> **Note.** These are currently stored as resolved hex values. Once the token
+> pipeline supports references, they will point back to their primitive tokens
+> so a primitive change flows through automatically.
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { colors } from '@origon/tokens-react';
+
+<button style={{ background: colors.brand.kripto[600], color: colors.base.white }}>
+  Buy
+</button>
+```
+
+CSS variables are also available:
+
+```css
+@import '@origon/tokens-react/css';
+
+.button-primary {
+  background: var(--color-brand-kripto-600);
+  color: var(--color-base-white);
+}
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_tokens/origon_tokens.dart';
+
+Container(
+  color: OrigonColors.brandKripto.s600,
+  child: Text(
+    'Buy',
+    style: TextStyle(color: OrigonColors.white),
+  ),
+);
+```
+
+Access by step:
+
+```dart
+final hover = OrigonColors.brandKripto[700]; // step-based lookup
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import SwiftUI
+import OrigonTokens
+
+Button("Buy") { }
+    .foregroundStyle(OrigonColors.white)
+    .background(OrigonColors.brandKripto.s600)
+```
+
+Step-based lookup:
+
+```swift
+let hover = OrigonColors.brandKripto[700]
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Naming rules
+
+- Scales use `<name>.<step>` where step ∈ `{50, 100, …, 900}`. Lower = lighter
+  (except `midnightTeal`, where 50 is the lightest usable teal and 900 is
+  near-black by design).
+- Brand scales live under `brand.<product>` (React) or `brand<Product>`
+  (Flutter/Swift due to language conventions).
+- CSS variables are kebab-cased: `--color-brand-kripto-600`.
+
+## Do / don't
+
+- ✅ Reference tokens through the semantic layer once it lands
+  (`surface.primary` rather than `brand.kripto[600]` directly in product code).
+- ✅ Use step 500 as the "brand default" for both scales.
+- ❌ Don't hand-pick hex values that "look close". If a color isn't in the
+  palette, propose a token addition in Figma first.

@@ -1,0 +1,12 @@
+<svg width="44" height="34" viewBox="0 0 44 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect y="3" width="44" height="28" rx="4" fill="#F3F4F9"/>
+<mask id="mask0_12_75895" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="3" width="44" height="28">
+<rect y="3" width="44" height="28" rx="4" fill="white"/>
+</mask>
+<g mask="url(#mask0_12_75895)">
+<path d="M37.4177 6H36.3848C34.3881 6 32.77 7.61143 32.77 9.6V18H34.6979V14.9143C35.1455 15.12 35.6619 15.2571 36.1783 15.2571H37.2455C39.3111 15.2571 40.9981 13.5771 40.9981 11.52V9.6C41.0325 7.61143 39.4144 6 37.4177 6ZM39.0701 11.52C39.0701 12.5143 38.2439 13.3371 37.2455 13.3371H36.2127C35.3865 13.3371 34.7324 12.6857 34.7324 11.8629V9.63429C34.7324 8.70857 35.4897 7.95429 36.4193 7.95429H37.4521C38.3816 7.95429 39.139 8.70857 39.139 9.63429V11.52H39.0701Z" fill="black"/>
+</g>
+<rect opacity="0.2" x="4" y="21" width="24" height="2" rx="0.923077" fill="black"/>
+<rect opacity="0.2" x="4" y="25" width="9" height="2" rx="0.923077" fill="black"/>
+<rect opacity="0.2" x="4" y="10" width="7" height="4" rx="1" fill="black"/>
+</svg>

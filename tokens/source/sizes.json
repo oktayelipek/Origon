@@ -1,0 +1,109 @@
+{
+  "$description": "Origon UI — size tokens (icon sizes, control heights) from the Foundations collection.",
+  "size": {
+    "0": {
+      "$value": 0,
+      "$type": "dimension"
+    },
+    "1": {
+      "$value": 4,
+      "$type": "dimension"
+    },
+    "2": {
+      "$value": 8,
+      "$type": "dimension"
+    },
+    "3": {
+      "$value": 12,
+      "$type": "dimension"
+    },
+    "4": {
+      "$value": 16,
+      "$type": "dimension"
+    },
+    "5": {
+      "$value": 20,
+      "$type": "dimension"
+    },
+    "6": {
+      "$value": 24,
+      "$type": "dimension"
+    },
+    "7": {
+      "$value": 28,
+      "$type": "dimension"
+    },
+    "8": {
+      "$value": 32,
+      "$type": "dimension"
+    },
+    "9": {
+      "$value": 36,
+      "$type": "dimension"
+    },
+    "10": {
+      "$value": 40,
+      "$type": "dimension"
+    },
+    "11": {
+      "$value": 44,
+      "$type": "dimension"
+    },
+    "12": {
+      "$value": 48,
+      "$type": "dimension"
+    },
+    "13": {
+      "$value": 52,
+      "$type": "dimension"
+    },
+    "14": {
+      "$value": 56,
+      "$type": "dimension"
+    },
+    "15": {
+      "$value": 60,
+      "$type": "dimension"
+    },
+    "16": {
+      "$value": 64,
+      "$type": "dimension"
+    },
+    "17": {
+      "$value": 68,
+      "$type": "dimension"
+    },
+    "18": {
+      "$value": 72,
+      "$type": "dimension"
+    },
+    "19": {
+      "$value": 76,
+      "$type": "dimension"
+    },
+    "20": {
+      "$value": 80,
+      "$type": "dimension"
+    },
+    "21": {
+      "$value": 84,
+      "$type": "dimension"
+    },
+    "22": {
+      "$value": 88,
+      "$type": "dimension"
+    },
+    "23": {
+      "$value": 92,
+      "$type": "dimension"
+    },
+    "24": {
+      "$value": 96,
+      "$type": "dimension"
+    },
+    "25": {
+      "$value": 100,
+      "$type": "dimension"
+    }
+  }
+}

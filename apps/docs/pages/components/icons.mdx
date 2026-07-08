@@ -1,0 +1,199 @@
+---
+title: Icons + Logos
+---
+
+import { Tabs } from 'nextra/components';
+import { Icon, ICON_NAMES } from '@origon/react';
+import { ICON_COMPONENT_MAP, GENERATED_ICON_NAMES } from '@origon/react/icons';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Icons + Logos
+
+Origon UI ships two icon layers:
+
+1. **Starter set** (`Icon` component, 12 glyphs) — for the design system's
+   own docs and quick prototyping.
+2. **Full library** (158 icons under "Essentials" in Figma) — auto-exported
+   from Figma via `scripts/export-icons.mjs`. Each icon ships as its own
+   named React component under `@origon/react/icons`.
+
+Additional multi-color brand assets (bank logos, crypto marks) ship separately
+via `@origon/react/logos` — see the [Logos page](/components/logos).
+
+## Starter icons (`Icon`)
+
+<div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(120px, 1fr))', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, color: '#f0f4f7' }}>
+  {ICON_NAMES.map((name) => (
+    <div key={name} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8, padding: 12, background: 'var(--semantic-level-elevation, #131f2f)', borderRadius: 8 }}>
+      <Icon name={name} size={24} />
+      <code style={{ fontSize: 11, opacity: 0.7 }}>{name}</code>
+    </div>
+  ))}
+</div>
+
+## Full Figma library
+
+**158 icons** synced from the Figma Essentials group. Each ships as its own
+React component (tree-shakable) plus a name-keyed map for dynamic use.
+
+<FigmaIconGrid />
+
+export const FigmaIconGrid = () => {
+  const [query, setQuery] = useState('');
+  const filtered = GENERATED_ICON_NAMES.filter((n) => n.toLowerCase().includes(query.toLowerCase()));
+  return (
+    <div style={{ marginBottom: 24 }}>
+      <input
+        placeholder={`Search ${GENERATED_ICON_NAMES.length} icons…`}
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        style={{
+          display: 'block',
+          width: '100%',
+          padding: '10px 14px',
+          marginBottom: 16,
+          fontSize: 14,
+          fontFamily: 'inherit',
+          background: 'var(--semantic-level-elevation, #131f2f)',
+          color: 'var(--semantic-text-focus, #f0f4f7)',
+          border: '1px solid var(--semantic-border-level-4, #192f43)',
+          borderRadius: 8,
+          outline: 'none',
+        }}
+      />
+      <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 12 }}>
+        {filtered.length} of {GENERATED_ICON_NAMES.length}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(96px, 1fr))', gap: 8, padding: 16, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, color: '#f0f4f7', maxHeight: 480, overflowY: 'auto' }}>
+        {filtered.map((name) => {
+          const IconComp = ICON_COMPONENT_MAP[name];
+          return (
+            <div
+              key={name}
+              title={name}
+              style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 4, padding: 8, background: 'var(--semantic-level-elevation, #131f2f)', borderRadius: 6, cursor: 'pointer', overflow: 'hidden' }}
+            >
+              <IconComp size={20} />
+              <code style={{ fontSize: 9, opacity: 0.6, textAlign: 'center', maxWidth: '100%', textOverflow: 'ellipsis', overflow: 'hidden', whiteSpace: 'nowrap' }}>{name}</code>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+### Sizing
+
+Icons inherit `size` and `currentColor` — style them like text.
+
+<div style={{ display: 'flex', alignItems: 'center', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, color: '#f0f4f7' }}>
+  <Icon name="star" size={12} />
+  <Icon name="star" size={16} />
+  <Icon name="star" size={20} />
+  <Icon name="star" size={24} />
+  <Icon name="star" size={32} />
+  <Icon name="star" size={48} />
+</div>
+
+### Coloring
+
+<div style={{ display: 'flex', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Icon name="check" size={24} style={{ color: '#4fa963' }} />
+  <Icon name="alert" size={24} style={{ color: '#f0ae67' }} />
+  <Icon name="close" size={24} style={{ color: '#dc3323' }} />
+  <Icon name="info" size={24} style={{ color: '#5384d1' }} />
+</div>
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+// Named import from the full library:
+import { StarIcon, CheckIcon } from '@origon/react/icons';
+
+<StarIcon size={20} style={{ color: 'gold' }} />
+
+// Or the starter set (for smaller bundle when only 12 glyphs needed):
+import { Icon } from '@origon/react';
+
+<Icon name="star" size={20} style={{ color: 'gold' }} />
+
+// Dynamic lookup:
+import { ICON_COMPONENT_MAP } from '@origon/react/icons';
+const IconComp = ICON_COMPONENT_MAP['star'];
+<IconComp size={20} />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+// Starter set (12 glyphs, mapped to Material icons):
+OrigonIcon(name: OrigonIconName.star, size: 20, color: Colors.amber);
+
+// Full Figma library (598 icons, via flutter_svg):
+import 'package:origon_tokens/generated/origon_svg_icons.dart';
+
+OrigonSvgIcon(name: OrigonIconFull.star, size: 20, color: Colors.amber);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+// Starter set (12 glyphs, mapped to SF Symbols):
+OrigonIcon(.star, size: 20)
+    .foregroundColor(.yellow)
+
+// Full Figma library (598 icons, iOS 17+ built-in SVG asset support):
+import OrigonTokens
+
+OrigonSvgIcon(.star, size: 20, tint: .yellow)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## API — `<Icon>` (starter set)
+
+<PropsTable rows={[
+  { name: 'name', type: 'IconName', description: 'check, close, chevronDown, chevronRight, info, alert, star, search, plus, minus, arrowUp, arrowDown.' },
+  { name: 'size', type: 'number', defaultValue: '20', description: 'Width and height in px. Icons are square.' },
+]} />
+
+## Generated components (`@origon/react/icons`)
+
+Each icon is a React component: `<NameIcon />` — e.g., `<StarIcon />`,
+`<CheckIcon />`, `<ArrowDownIcon />`. All accept:
+
+<PropsTable rows={[
+  { name: 'size', type: 'number', defaultValue: '20', description: 'Width + height in px.' },
+  { name: 'style', type: 'CSSProperties', description: 'Standard React style prop. Use color to change stroke/fill (currentColor).' },
+  { name: '...SVGAttributes', type: 'React.SVGAttributes<SVGSVGElement>', description: 'onClick, aria-label, className, ref (via forwardRef in v3), etc.' },
+]} />
+
+## Regenerating
+
+The generator is idempotent — re-run to pull the latest from Figma:
+
+```bash
+FIGMA_TOKEN=figd_… node scripts/export-icons.mjs
+```
+
+Optional `--group=Essentials|Others|…` to export a different section.
+
+## Roadmap
+
+- [x] Essentials export pipeline (158 icons).
+- [ ] Other groups: Communication (50), Finance & Transactions (62), Time (11),
+  Navigation, SYSTEM.
+- [ ] Bank / Crypto / Payment logos — separate `Logo` component with raster fallback.
+- [ ] Flutter / Swift full library port (embed as assets or shape data).

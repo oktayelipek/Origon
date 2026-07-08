@@ -1,0 +1,50 @@
+---
+title: Progress Stepper
+---
+
+import { ProgressStepper } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Progress Stepper
+
+Numbered progress dots + connecting lines. Ideal for onboarding wizards,
+multi-step forms, KYC flows. Source: Figma `- Progress Stepper` (`12:54443`).
+
+## Live preview
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 32, padding: 32, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <ProgressStepper
+    active={2}
+    steps={[
+      { label: 'Contact', description: 'Email + phone' },
+      { label: 'Identity', description: 'ID + selfie' },
+      { label: 'Address', description: 'Proof of residence' },
+      { label: 'Review' },
+    ]}
+  />
+  <ProgressStepper active={0} steps={[{ label: 'Step 1' }, { label: 'Step 2' }, { label: 'Step 3' }]} />
+  <ProgressStepper
+    active={1}
+    orientation="vertical"
+    steps={[
+      { label: 'Order placed', description: 'Received by exchange' },
+      { label: 'Filling', description: 'Matching orders' },
+      { label: 'Filled', description: 'Trade complete' },
+    ]}
+  />
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'steps', type: 'Step[]', description: 'Ordered steps. Each has optional label + description.' },
+  { name: 'active', type: 'number', description: 'Zero-based index of the current step.' },
+  { name: 'completed', type: 'number[]', description: 'Zero-based indices of completed steps. Defaults to all indices before `active`.' },
+  { name: 'orientation', type: '"horizontal" | "vertical"', defaultValue: '"horizontal"' },
+]} />
+
+## Accessibility
+
+- Rendered as `<ol>` — screen readers announce ordered sequence.
+- The active step carries `aria-current="step"`.
+- Completed steps show a checkmark instead of the number.

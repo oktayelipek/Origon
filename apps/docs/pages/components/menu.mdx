@@ -1,0 +1,51 @@
+---
+title: Menu
+---
+
+import { Menu, Button, Icon } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Menu
+
+Anchored action list. Portals to `document.body` so it escapes overflow
+clips. Source: Figma `- Menu` (`12:55798`).
+
+## Live preview
+
+<div style={{ display: 'flex', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Menu
+    trigger={<Button variant="outline">Actions ▾</Button>}
+    onSelect={(v) => alert(`Selected: ${v}`)}
+    items={[
+      { value: 'copy', label: 'Copy address', icon: <Icon name="check" /> },
+      { value: 'share', label: 'Share', icon: <Icon name="star" /> },
+      { value: 'export', label: 'Export CSV', divider: true },
+      { value: 'archive', label: 'Archive' },
+      { value: 'delete', label: 'Delete', danger: true, divider: true },
+    ]}
+  />
+  <Menu
+    trigger={<Button variant="outline">Positioning: bottom-end</Button>}
+    side="bottom-end"
+    items={[
+      { value: '1', label: 'Aligns to trigger right edge' },
+      { value: '2', label: 'Flips if it would overflow', disabled: true },
+    ]}
+  />
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'trigger', type: 'ReactElement', description: 'Element that toggles the menu. Cloned to intercept clicks + set aria attrs.' },
+  { name: 'items', type: 'MenuItem[]', description: 'Menu items. Each has value, label, optional icon/disabled/danger/divider.' },
+  { name: 'onSelect', type: '(value: string) => void', description: 'Called when a non-disabled item is clicked.' },
+  { name: 'side', type: '"bottom-start" | "bottom-end" | "top-start" | "top-end"', defaultValue: '"bottom-start"' },
+]} />
+
+## Behavior
+
+- Click outside or `Escape` closes.
+- Portals to body, clamps to viewport with 4px margin.
+- `divider: true` on an item renders a horizontal rule *before* it.
+- `danger: true` uses red text (destructive intent).

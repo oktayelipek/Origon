@@ -1,0 +1,6 @@
+<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="1.00024" y="1" width="7.1999" height="7.2" rx="0.799989" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="15.4" cy="4.6" rx="3.59995" ry="3.6" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.4287 11.5816C15.3067 11.3471 15.0643 11.2 14.7999 11.2C14.5356 11.2 14.2932 11.3471 14.1711 11.5816L10.7016 17.8272C10.5683 18.0699 10.5662 18.3634 10.696 18.608C10.8187 18.8459 11.0627 18.9967 11.3304 19H18.2695C18.5372 18.9967 18.7812 18.8459 18.9039 18.608C19.0337 18.3634 19.0316 18.0699 18.8983 17.8272L15.4287 11.5816Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M5.081 10.8272C4.96276 10.684 4.78674 10.601 4.60101 10.601C4.41527 10.601 4.23925 10.684 4.12101 10.8272L1.15305 14.3768C0.948982 14.622 0.948982 14.978 1.15305 15.2232L4.11941 18.7728C4.23765 18.916 4.41367 18.999 4.59941 18.999C4.78514 18.999 4.96116 18.916 5.0794 18.7728L8.04576 15.2232C8.24983 14.978 8.24983 14.622 8.04576 14.3768L5.081 10.8272Z" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

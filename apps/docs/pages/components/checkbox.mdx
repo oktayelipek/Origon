@@ -1,0 +1,101 @@
+---
+title: Checkbox
+---
+
+import { Tabs } from 'nextra/components';
+import { Checkbox } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Checkbox
+
+Boolean input. Source: Figma `Checkbox` (`12:86274`) — 12 variants across
+Size × State (Default, Enabled, Disabled, Error).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [a, setA] = useState(false);
+  const [b, setB] = useState(true);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <Checkbox label="Unchecked" checked={a} onChange={setA} />
+      <Checkbox label="Checked" checked={b} onChange={setB} />
+      <Checkbox label="Disabled unchecked" checked={false} disabled />
+      <Checkbox label="Disabled checked" checked={true} disabled />
+      <Checkbox label="Error state" checked={false} error />
+    </div>
+  );
+};
+
+### Sizes
+
+<div style={{ display: 'flex', alignItems: 'center', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Checkbox size="small" checked label="Small" />
+  <Checkbox size="medium" checked label="Medium" />
+  <Checkbox size="large" checked label="Large" />
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'size', type: '"small" | "medium" | "large"', defaultValue: '"medium"', description: 'Box size: 16 / 20 / 24 px. Small uses radius xxs (4), others use xs (8).' },
+  { name: 'checked', type: 'boolean', defaultValue: 'false', description: 'Controlled checked state.' },
+  { name: 'onChange', type: '(checked: boolean) => void', description: 'Called with the next checked value on toggle.' },
+  { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Non-interactive. Adds a diagonal slash mark.' },
+  { name: 'error', type: 'boolean', defaultValue: 'false', description: 'Shows red border. Also sets aria-invalid.' },
+  { name: 'label', type: 'ReactNode', description: 'Optional inline label. Wraps the input in a <label>.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Checkbox } from '@origon/react';
+
+const [agreed, setAgreed] = useState(false);
+<Checkbox
+  checked={agreed}
+  onChange={setAgreed}
+  label="I agree to the terms and conditions"
+/>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonCheckbox(
+  value: agreed,
+  onChanged: (v) => setState(() => agreed = v),
+  label: const Text('I agree to the terms and conditions'),
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+@State var agreed = false
+
+OrigonCheckbox(isOn: $agreed) {
+    Text("I agree to the terms and conditions")
+}
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Accessibility
+
+- Native `<input type="checkbox">` — full keyboard support, focus indicator, screen reader announcement.
+- Label uses `<label htmlFor>` — clicking the label toggles the input.
+- `error` state also sets `aria-invalid="true"` so assistive tech announces the validation state.

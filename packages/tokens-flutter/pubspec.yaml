@@ -1,0 +1,22 @@
+name: origon_tokens
+description: Origon UI design tokens for Flutter (generated).
+version: 0.0.0
+publish_to: none
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.22.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_svg: ^2.0.10
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  assets:
+    - lib/generated/icons/
+    - lib/generated/logos/

@@ -1,0 +1,45 @@
+---
+title: Toggle
+---
+
+import { Toggle } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Toggle
+
+Boolean switch (iOS-style). For a labelled boolean, prefer this over
+Checkbox when the change takes effect immediately (settings, preferences).
+Source: Figma `{FK-Toggle}` (`12:3011`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [notif, setNotif] = useState(true);
+  const [dark, setDark] = useState(false);
+  const [beta, setBeta] = useState(false);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <Toggle label="Push notifications" checked={notif} onChange={setNotif} />
+      <Toggle label="Dark mode" checked={dark} onChange={setDark} labelPosition="left" />
+      <Toggle label="Enable beta features" checked={beta} onChange={setBeta} size="small" />
+      <Toggle label="Locked (disabled)" checked disabled />
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'checked', type: 'boolean', description: 'Controlled state.' },
+  { name: 'onChange', type: '(checked: boolean) => void' },
+  { name: 'size', type: '"small" | "medium" | "large"', defaultValue: '"medium"' },
+  { name: 'label', type: 'ReactNode', description: 'Optional inline label.' },
+  { name: 'labelPosition', type: '"left" | "right"', defaultValue: '"right"' },
+  { name: 'disabled', type: 'boolean' },
+]} />
+
+Renders as `<input type="checkbox" role="switch">` — screen readers announce
+the current state (on/off).

@@ -1,0 +1,194 @@
+---
+title: Input
+---
+
+import { Tabs } from 'nextra/components';
+import { Input, PhoneInput, PasswordInput, PinInput } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Input
+
+Text input. Source: Figma `{FKInput}` (`12:68514`) — 81 variants across many
+axes. This v1 covers the core Default feature; specialized features
+(Numeric, Phone, ID, Encrypted PIN, Multi-line, Extensions) will ship as
+separate components.
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [name, setName] = useState('');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 400 }}>
+      <Input label="Ad Soyad" placeholder="John Doe" value={name} onChange={(e) => setName(e.target.value)} fullWidth />
+      <Input label="Email" hint="Onay linki bu adrese gönderilecek" placeholder="you@example.com" fullWidth />
+      <Input label="Şifre" type="password" fullWidth />
+      <Input label="Kod" size="x-small" placeholder="6 haneli" fullWidth />
+      <Input label="Yanlış giriş" error="Geçersiz e-posta" defaultValue="not-an-email" fullWidth />
+      <Input label="Devre dışı" disabled defaultValue="düzenlenemez" fullWidth />
+    </div>
+  );
+};
+
+### Sizes
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 400 }}>
+  <Input size="large" label="Large (54px)" placeholder="Default height" fullWidth />
+  <Input size="small" label="Small (44px)" placeholder="Compact" fullWidth />
+  <Input size="x-small" label="X-Small (32px)" placeholder="Dense" fullWidth />
+</div>
+
+## Specialized variants
+
+Three drop-in specialized components mirror Figma's `FKInput` feature axis:
+
+<SpecializedDemo />
+
+export const SpecializedDemo = () => {
+  const [phone, setPhone] = useState('');
+  const [country, setCountry] = useState('TR');
+  const [pw, setPw] = useState('');
+  const [pin, setPin] = useState('');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 480 }}>
+      <PhoneInput
+        label="Telefon numarası"
+        value={phone}
+        onChange={(v) => setPhone(v)}
+        countryCode={country}
+        onCountryCodeChange={setCountry}
+        fullWidth
+      />
+      <PasswordInput
+        label="Şifre"
+        value={pw}
+        onChange={(e) => setPw(e.target.value)}
+        showStrengthMeter
+        placeholder="En az 8 karakter"
+        fullWidth
+      />
+      <div>
+        <div style={{ fontSize: 11, color: '#858fa6', marginBottom: 8 }}>SMS doğrulama kodu</div>
+        <PinInput length={6} value={pin} onChange={setPin} onComplete={(v) => alert(`Complete: ${v}`)} autoFocus={false} />
+      </div>
+      <div>
+        <div style={{ fontSize: 11, color: '#858fa6', marginBottom: 8 }}>PIN (masked)</div>
+        <PinInput length={4} value="" onChange={() => {}} mask />
+      </div>
+    </div>
+  );
+};
+
+### PhoneInput API
+
+<PropsTable rows={[
+  { name: 'value', type: 'string', description: 'National number (no country prefix).' },
+  { name: 'onChange', type: '(national: string, dial: string) => void', description: 'Called with the sanitized digits + current country dial code.' },
+  { name: 'countryCode', type: 'string', defaultValue: '"TR"', description: 'ISO2 country code. Controls the flag + dial prefix.' },
+  { name: 'onCountryCodeChange', type: '(code: string) => void', description: 'Called when the user picks a different country.' },
+]} />
+
+### PasswordInput API
+
+<PropsTable rows={[
+  { name: 'showStrengthMeter', type: 'boolean', defaultValue: 'false', description: 'Renders the 3-bar strength gauge below the field.' },
+  { name: 'scoreStrength', type: '(v: string) => "weak" | "middle" | "strong"', description: 'Override the built-in scoring (length + character classes).' },
+]} />
+
+Extends all `Input` props except `type` (fixed to password) and `rightIcon` (replaced by the visibility toggle).
+
+### PinInput API
+
+<PropsTable rows={[
+  { name: 'length', type: '4 | 6', defaultValue: '6', description: 'Number of digit boxes.' },
+  { name: 'value', type: 'string', description: 'Concatenated digits (up to `length`).' },
+  { name: 'onChange', type: '(value: string) => void', description: 'Called on every keystroke.' },
+  { name: 'onComplete', type: '(value: string) => void', description: 'Called once when all digits are filled.' },
+  { name: 'mask', type: 'boolean', defaultValue: 'false', description: 'Renders bullets instead of digits (for PIN entry).' },
+  { name: 'autoFocus', type: 'boolean', defaultValue: 'false', description: 'Focus the first box on mount.' },
+]} />
+
+Supports paste (whole code paste splits across boxes), backspace-to-previous, and ArrowLeft/Right nav.
+
+## API
+
+<PropsTable rows={[
+  { name: 'size', type: '"large" | "small" | "x-small"', defaultValue: '"large"', description: 'Height: 54 / 44 / 32 px.' },
+  { name: 'label', type: 'string', description: 'Title text rendered above the field.' },
+  { name: 'hint', type: 'string', description: 'Helper text below the field (aria-describedby).' },
+  { name: 'error', type: 'string', description: 'Error message. Overrides hint. Sets aria-invalid + red border.' },
+  { name: 'leftIcon', type: 'ReactNode', description: 'Icon rendered inside the field on the left.' },
+  { name: 'rightIcon', type: 'ReactNode', description: 'Icon rendered inside the field on the right.' },
+  { name: 'fullWidth', type: 'boolean', defaultValue: 'false', description: 'Stretch to fill container width.' },
+]} />
+
+Also accepts all native `<input>` props (`type`, `value`, `onChange`, `disabled`, etc.).
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Input } from '@origon/react';
+
+<Input
+  label="Email"
+  type="email"
+  value={email}
+  onChange={(e) => setEmail(e.target.value)}
+  error={touched && !isValid ? 'Geçersiz e-posta' : undefined}
+/>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+final _emailController = TextEditingController();
+
+OrigonInput(
+  label: 'Email',
+  controller: _emailController,
+  onChanged: (v) => setState(() => email = v),
+  errorText: (touched && !isValid) ? 'Geçersiz e-posta' : null,
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+@State private var email = ""
+@State private var touched = false
+
+OrigonInput(
+    "you@example.com",
+    text: $email,
+    label: "Email",
+    errorText: touched && !isValid ? "Geçersiz e-posta" : nil
+)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## States
+
+- **Inactive** — resting; bg `blueGray.200`.
+- **Focus / Typing** — active; bg lightens to `blueGray.400`.
+- **Done** — filled but blurred (visually same as Inactive currently).
+- **Error** — 1px red border (`red.600`) + red error message.
+- **Disabled** — non-interactive; muted text color.
+
+## Accessibility
+
+- Native `<input>` — full keyboard, focus, screen reader support.
+- Label uses `<label htmlFor>` for click-to-focus and screen reader association.
+- Error text is linked via `aria-describedby` and sets `aria-invalid="true"`.

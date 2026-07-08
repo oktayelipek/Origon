@@ -1,0 +1,80 @@
+---
+title: Gauge
+---
+
+import { Tabs } from 'nextra/components';
+import { Gauge } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Gauge
+
+Circular progress ring — 0 to 100 percent, tinted by tone. Source: Figma
+`- Gauge` (`12:84862`).
+
+## Live preview
+
+<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'flex-end', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Gauge value={0} tone="neutral" />
+  <Gauge value={35} tone="neutral" />
+  <Gauge value={75} tone="brand" />
+  <Gauge value={58} tone="success" />
+  <Gauge value={84} tone="warning" />
+  <Gauge value={92} tone="danger" />
+</div>
+
+### Sizes
+
+<div style={{ display: 'flex', alignItems: 'flex-end', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Gauge value={75} tone="brand" size={24} />
+  <Gauge value={75} tone="brand" size={32} />
+  <Gauge value={75} tone="brand" size={44} />
+  <Gauge value={75} tone="brand" size={72} />
+  <Gauge value={75} tone="brand" size={120} />
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'value', type: 'number', description: 'Percentage 0–100. Clamped in-range.' },
+  { name: 'size', type: 'number', defaultValue: '44', description: 'Overall diameter in px. Stroke width scales as size / 12.' },
+  { name: 'tone', type: '"neutral" | "success" | "warning" | "danger" | "brand"', defaultValue: '"neutral"', description: 'Ring color family.' },
+  { name: 'showLabel', type: 'boolean', defaultValue: 'true', description: 'Show %value at center.' },
+  { name: 'label', type: 'ReactNode', description: 'Custom label override.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Gauge } from '@origon/react';
+
+<Gauge value={score} tone="brand" size={72} />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonGauge(value: score, tone: OrigonGaugeTone.brand, size: 72);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonGauge(value: score, size: 72, tone: .brand)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Accessibility
+
+- Rendered as `role="meter"` with `aria-valuemin`, `aria-valuemax`, `aria-valuenow`.
+- Track and arc animate smoothly (`stroke-dasharray` transition).

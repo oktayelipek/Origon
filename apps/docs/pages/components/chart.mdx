@@ -1,0 +1,118 @@
+---
+title: Chart
+---
+
+import { Tabs } from 'nextra/components';
+import { Chart } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Chart
+
+Line / area / bar / candlestick chart with hover crosshair + tooltip.
+For heavier viz (brushing, log scale, multi-axis, WebGL) integrate a chart
+library and pass Origon tokens as theme values.
+
+Source: Figma `- Charts` (`12:86299`).
+
+## Live preview
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 8 }}>Line</div>
+    <Chart kind="line" width={280} height={140} series={[{ data: [10, 12, 9, 15, 18, 16, 22, 24, 21, 27] }]} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 8 }}>Area</div>
+    <Chart kind="area" width={280} height={140} series={[{ data: [10, 12, 9, 15, 18, 16, 22, 24, 21, 27] }]} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 8 }}>Bar</div>
+    <Chart kind="bar" width={280} height={140} series={[{ data: [5, 8, 3, 12, 7, 10, 6] }]} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 8 }}>Multi-series line</div>
+    <Chart kind="line" width={280} height={140} series={[
+      { label: 'BTC', color: '#4fa963', data: [10, 12, 15, 18, 22, 27] },
+      { label: 'ETH', color: '#dc3323', data: [20, 18, 15, 14, 12, 10] },
+    ]} />
+  </div>
+  <div>
+    <div style={{ fontSize: 12, opacity: 0.6, marginBottom: 8 }}>Candlestick (OHLC)</div>
+    <Chart
+      kind="candlestick"
+      width={360}
+      height={200}
+      ohlc={[
+        { open: 100, high: 108, low: 98, close: 105, label: '12:00' },
+        { open: 105, high: 112, low: 103, close: 110, label: '13:00' },
+        { open: 110, high: 115, low: 106, close: 108, label: '14:00' },
+        { open: 108, high: 111, low: 100, close: 102, label: '15:00' },
+        { open: 102, high: 104, low: 96, close: 97, label: '16:00' },
+        { open: 97, high: 105, low: 96, close: 104, label: '17:00' },
+        { open: 104, high: 112, low: 103, close: 111, label: '18:00' },
+        { open: 111, high: 118, low: 110, close: 116, label: '19:00' },
+      ]}
+    />
+  </div>
+</div>
+
+Hover any of the charts above to see the crosshair + tooltip.
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Chart } from '@origon/react';
+
+<Chart
+  kind="area"
+  series={[{ data: prices }]}
+  width={400}
+  height={200}
+/>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonChart(
+  kind: OrigonChartKind.area,
+  series: [OrigonChartSeries(data: prices)],
+  width: 400,
+  height: 200,
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonChart(
+    kind: .area,
+    series: [OrigonChartSeries(data: prices)],
+    width: 400,
+    height: 200
+)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## API
+
+<PropsTable rows={[
+  { name: 'kind', type: '"line" | "area" | "bar"', defaultValue: '"line"', description: 'Render style.' },
+  { name: 'series', type: '{ data, color?, label? }[]', description: 'One or more data series.' },
+  { name: 'labels', type: 'string[]', description: 'X-axis labels. Rendered only when showAxes is true.' },
+  { name: 'width', type: 'number', defaultValue: '320' },
+  { name: 'height', type: 'number', defaultValue: '160' },
+  { name: 'showGrid', type: 'boolean', defaultValue: 'true' },
+  { name: 'showAxes', type: 'boolean', defaultValue: 'false' },
+]} />

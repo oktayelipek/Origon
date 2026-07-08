@@ -1,0 +1,61 @@
+---
+title: Radius
+---
+
+import { Tabs } from 'nextra/components';
+import { RadiusScale } from '../../components/SpacingSample';
+
+# Radius
+
+Corner radius tokens. Buttons and inputs use `sm`; chips and small pills use
+`xs`; cards and containers scale up to `xxl` for hero surfaces.
+
+> **Partial import.** `md`, `lg`, `xl` exist per Figma variable search and will
+> land once the Metrics page is synced.
+
+<RadiusScale />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { radius } from '@origon/tokens-react';
+
+<div style={{ borderRadius: radius.sm }}>Content</div>
+```
+
+CSS:
+
+```css
+.button {
+  border-radius: var(--radius-sm);
+}
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_tokens/generated/origon_radius.dart';
+
+Container(
+  decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(OrigonRadius.sm),
+  ),
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import SwiftUI
+import OrigonTokens
+
+RoundedRectangle(cornerRadius: OrigonRadius.sm)
+```
+
+</Tabs.Tab>
+</Tabs>

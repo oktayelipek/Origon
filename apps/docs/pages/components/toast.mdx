@@ -1,0 +1,81 @@
+---
+title: Toast
+---
+
+import { ToastProvider, useToast, Button } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Toast
+
+Ephemeral notifications shown outside the primary flow. Managed by a
+`ToastProvider` at the app root; components call `useToast()` to enqueue.
+Source: Figma `{FK-Toast-Row}` / `{FK-Toast-Centered}` (`12:3039`).
+
+## Live preview
+
+<ToastProvider placement="bottom-right">
+  <Demo />
+</ToastProvider>
+
+export const Demo = () => {
+  const { toast } = useToast();
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <Button variant="outline" onClick={() => toast({ message: 'Portfolio refreshed', tone: 'info' })}>Info</Button>
+      <Button variant="outline" onClick={() => toast({ title: 'Order filled', message: 'BTC/TRY @ 3,458,000', tone: 'success' })}>Success + title</Button>
+      <Button variant="outline" onClick={() => toast({ message: 'Fee schedule changes in 3 days', tone: 'warning', duration: 6000 })}>Warning (6s)</Button>
+      <Button variant="outline" onClick={() => toast({ message: 'Order rejected — insufficient balance', tone: 'danger' })}>Danger</Button>
+      <Button variant="outline" onClick={() => toast({ message: 'Sticky notification', duration: 0, action: { label: 'Undo', onClick: () => alert('Undone') } })}>With action (sticky)</Button>
+    </div>
+  );
+};
+
+## Setup
+
+Wrap your app root once:
+
+```tsx
+import { ToastProvider } from '@origon/react';
+
+<ToastProvider placement="bottom-right">
+  <App />
+</ToastProvider>
+```
+
+Then fire toasts from anywhere:
+
+```tsx
+import { useToast } from '@origon/react';
+
+function BuyButton() {
+  const { toast } = useToast();
+  return <Button onClick={() => {
+    placeOrder();
+    toast({ title: 'Order sent', message: 'Your buy order is queued.', tone: 'success' });
+  }}>Buy</Button>;
+}
+```
+
+## Options
+
+<PropsTable rows={[
+  { name: 'message', type: 'ReactNode', description: 'Body text.' },
+  { name: 'title', type: 'ReactNode', description: 'Optional headline above the message.' },
+  { name: 'tone', type: '"info" | "success" | "warning" | "danger"', defaultValue: '"info"' },
+  { name: 'duration', type: 'number', defaultValue: '4000', description: 'Auto-dismiss delay in ms. Set to 0 for sticky.' },
+  { name: 'icon', type: 'ReactNode', description: 'Leading icon (tint follows tone accent).' },
+  { name: 'action', type: '{ label, onClick }', description: 'Optional inline action button (e.g., Undo).' },
+]} />
+
+## Provider props
+
+<PropsTable rows={[
+  { name: 'placement', type: '"top" | "top-right" | "bottom" | "bottom-right"', defaultValue: '"bottom-right"' },
+]} />
+
+## Accessibility
+
+- Region: `role="region"` + `aria-label="Notifications"`.
+- Each toast: `role="status"` — screen readers announce non-intrusively.
+- Sticky toasts (`duration: 0`) require the user to interact with the
+  dismiss button.

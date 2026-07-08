@@ -1,0 +1,169 @@
+---
+title: Button
+---
+
+import { Tabs } from 'nextra/components';
+import { Button } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Button
+
+The primary interactive control. Source of truth: Figma component set `{FKButton}`
+(node `8:135`) — 106 variants across 8 property axes (Size, Style, Presence,
+Type, State, Direction, Icon, Text).
+
+## Live preview
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Button variant="primary">Primary</Button>
+  <Button variant="focus">Focus</Button>
+  <Button variant="outline">Outline</Button>
+  <Button variant="ghost">Ghost</Button>
+  <Button variant="primary" disabled>Disabled</Button>
+</div>
+
+### Sizes
+
+<div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Button size="small">Small</Button>
+  <Button size="medium">Medium</Button>
+  <Button size="large">Large</Button>
+</div>
+
+### Presence
+
+`presence="subtle"` gives solid variants a low-emphasis look — background at 16%
+alpha, text at the brand color.
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Button variant="primary">Default</Button>
+  <Button variant="primary" presence="subtle">Subtle</Button>
+  <Button variant="focus">Default</Button>
+  <Button variant="focus" presence="subtle">Subtle</Button>
+</div>
+
+### With icons
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Button icon={<Star />} iconPosition="leading">Buy</Button>
+  <Button icon={<Star />} iconPosition="trailing">Continue</Button>
+  <Button icon={<Star />} iconPosition="only" aria-label="Favorite" />
+</div>
+
+export const Star = () => (
+  <svg viewBox="0 0 24 24" fill="currentColor" width="100%" height="100%">
+    <path d="M12 2 15 9 22 9.5l-5.5 4.8L18 22l-6-3.6L6 22l1.5-7.7L2 9.5 9 9z" />
+  </svg>
+);
+
+## API
+
+<PropsTable rows={[
+  { name: 'size', type: '"small" | "medium" | "large"', defaultValue: '"large"', description: 'Height + padding + radius + text scale. Small=22px pill (radius 28), Medium=34px (radius 8), Large=44px (radius 12).' },
+  { name: 'variant', type: '"primary" | "focus" | "outline" | "ghost"', defaultValue: '"primary"', description: 'Visual style. Primary = brand solid, Focus = light solid, Outline = bordered transparent, Ghost = no chrome.' },
+  { name: 'presence', type: '"default" | "subtle"', defaultValue: '"default"', description: 'Subtle uses 16% alpha bg with brand-color text for lower emphasis (primary/focus only).' },
+  { name: 'icon', type: 'ReactNode', description: 'Icon element (usually an SVG). Renders at size-appropriate dimensions.' },
+  { name: 'iconPosition', type: '"leading" | "trailing" | "only"', defaultValue: '"leading"', description: 'Placement of icon. "only" produces a square icon-button (aria-label required).' },
+  { name: 'fullWidth', type: 'boolean', defaultValue: 'false', description: 'Stretch to fill container width.' },
+  { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Native disabled — applies the disabled color set.' },
+]} />
+
+Also accepts all native `<button>` attributes (`onClick`, `type`, `aria-*`, etc.).
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Button } from '@origon/react';
+
+<Button variant="primary" size="large" onClick={handleBuy}>
+  Buy
+</Button>
+
+<Button variant="outline" icon={<StarIcon />} iconPosition="leading">
+  Add to favorites
+</Button>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonButton(
+  child: const Text('Buy'),
+  variant: OrigonButtonVariant.primary,
+  size: OrigonButtonSize.large,
+  onPressed: handleBuy,
+);
+
+OrigonButton(
+  child: const Text('Add to favorites'),
+  icon: const Icon(Icons.star),
+  variant: OrigonButtonVariant.outline,
+  iconPosition: OrigonButtonIconPosition.leading,
+  onPressed: () {},
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonButton("Buy", variant: .primary, size: .large) {
+    handleBuy()
+}
+
+OrigonButton(
+    size: .large,
+    variant: .outline,
+    action: {},
+    label: { Text("Add to favorites") },
+    icon: { Image(systemName: "star") }
+)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Anatomy
+
+- **Container** — background/border driven by `variant` + `presence` + state.
+- **Icon slot** — optional; positioned before or after the label, or replaces it.
+- **Label** — text, mid weight (500), font-size scaled with `size`.
+- **Corner radius** — small=28 (pill), medium=8, large=12.
+
+Padding, gap, radius, and text sizes all reference tokens (no hand-tuned numbers).
+
+## States
+
+- **Default** — resting.
+- **Hover** — background darkens ~8% (solid) or gets a 6% overlay (outline/ghost).
+- **Active** (pressed) — same overlay, deeper (~16% / 10%).
+- **Disabled** — `semantic.button.disable` background, `semantic.text.disable`
+  text, cursor blocked.
+
+The `focus-visible` ring is provided by the browser default for now — a token
+for focus outline will follow when Figma adds one.
+
+## Accessibility
+
+- Rendered as a native `<button>` — inherits keyboard, focus, and screen reader
+  behavior for free.
+- Icon-only buttons **must** provide `aria-label`.
+- `disabled` uses the native attribute (no ARIA needed).
+
+## Do / don't
+
+- ✅ Prefer `variant="primary"` for the primary action on a screen; use it once.
+- ✅ Use `variant="outline"` or `"ghost"` for secondary/tertiary actions.
+- ✅ Give icon-only buttons a clear `aria-label`.
+- ❌ Don't override colors inline — if a design needs a different color, propose
+  a new token or variant.
+- ❌ Don't put two primary buttons next to each other. Pair `primary` with
+  `outline` or `ghost`.

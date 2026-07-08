@@ -1,0 +1,42 @@
+---
+title: Ticker
+---
+
+import { Ticker } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Ticker
+
+Infinite horizontal marquee. Ideal for price feeds and announcement banners.
+Duplicates content once for a seamless loop. Source: Figma `- Ticker` (`12:3551`).
+
+## Live preview
+
+<div style={{ padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+  <Ticker
+    items={[
+      { key: 'btc', content: <><b>BTC</b> ₺3,458,000 <span style={{ color: '#4fa963' }}>+2.4%</span></> },
+      { key: 'eth', content: <><b>ETH</b> ₺124,800 <span style={{ color: '#dc3323' }}>−1.1%</span></> },
+      { key: 'sol', content: <><b>SOL</b> ₺2,190 <span style={{ color: '#4fa963' }}>+5.3%</span></> },
+      { key: 'avax', content: <><b>AVAX</b> ₺785 <span style={{ color: '#4fa963' }}>+3.2%</span></> },
+      { key: 'ada', content: <><b>ADA</b> ₺13.42 <span style={{ color: '#dc3323' }}>−0.8%</span></> },
+      { key: 'bnb', content: <><b>BNB</b> ₺19,850 <span style={{ color: '#4fa963' }}>+1.7%</span></> },
+    ]}
+    duration={30}
+  />
+</div>
+
+Hover the ticker to pause it (default behavior).
+
+## API
+
+<PropsTable rows={[
+  { name: 'items', type: 'TickerItem[]', description: 'Content nodes to loop.' },
+  { name: 'duration', type: 'number', defaultValue: '40', description: 'One full loop in seconds. Higher = slower.' },
+  { name: 'pauseOnHover', type: 'boolean', defaultValue: 'true' },
+  { name: 'gap', type: 'number', defaultValue: '40', description: 'Gap between items in px.' },
+  { name: 'direction', type: '"left" | "right"', defaultValue: '"left"' },
+]} />
+
+Rendered with `role="marquee"` — screen readers may skip the animation.
+Announcements should also live in an aria-live region elsewhere.

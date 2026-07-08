@@ -1,0 +1,35 @@
+---
+title: Notification Badge
+---
+
+import { NotificationBadge, Button, Icon } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Notification Badge
+
+Dot or count overlay for notifications, unread counts, alerts. Wraps any
+child and positions itself at the top-right corner. Source: Figma
+`- Notification Badge` (`12:55791`).
+
+## Live preview
+
+<div style={{ display: 'flex', gap: 32, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, alignItems: 'center' }}>
+  <NotificationBadge count={3}><Button variant="outline" iconPosition="only" icon={<Icon name="star" />} aria-label="Favorites" /></NotificationBadge>
+  <NotificationBadge count={12} tone="brand"><Button variant="outline">Inbox</Button></NotificationBadge>
+  <NotificationBadge count={128} max={99} tone="warning"><Button variant="outline">Orders</Button></NotificationBadge>
+  <NotificationBadge dot tone="success"><Button variant="outline">Online</Button></NotificationBadge>
+  <NotificationBadge count={0} showZero><Button variant="outline">All caught up</Button></NotificationBadge>
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'children', type: 'ReactNode', description: 'Wrapped element the badge overlays.' },
+  { name: 'count', type: 'number | string', description: 'Numeric count (0 hides unless showZero). String shown as-is.' },
+  { name: 'dot', type: 'boolean', description: 'Show a small dot instead of a count.' },
+  { name: 'max', type: 'number', defaultValue: '99', description: 'Cap for numeric display. Values above show as `${max}+`.' },
+  { name: 'showZero', type: 'boolean', description: 'Show badge even when count is 0.' },
+  { name: 'tone', type: '"brand" | "success" | "warning" | "danger"', defaultValue: '"danger"' },
+]} />
+
+Rendered with `role="status"` + auto `aria-label` (`"3 notifications"`).

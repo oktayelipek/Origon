@@ -1,0 +1,71 @@
+---
+title: Tabs
+---
+
+import { Tabs } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Tabs
+
+Horizontal navigation between related views. Two variants:
+- **`underline`** — subtle bottom border for content pane headers.
+- **`pill`** — rounded pill for toolbar-style switching.
+
+Source: Figma `{Tab}` (`12:48473`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [tab, setTab] = useState('overview');
+  const [view, setView] = useState('list');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <div>
+        <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Underline</div>
+        <Tabs
+          value={tab}
+          onChange={setTab}
+          tabs={[
+            { value: 'overview', label: 'Overview' },
+            { value: 'orders', label: 'Orders' },
+            { value: 'balances', label: 'Balances' },
+            { value: 'history', label: 'History', disabled: true },
+          ]}
+        />
+      </div>
+      <div>
+        <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Pill</div>
+        <Tabs
+          variant="pill"
+          value={view}
+          onChange={setView}
+          tabs={[
+            { value: 'list', label: 'List' },
+            { value: 'grid', label: 'Grid' },
+            { value: 'chart', label: 'Chart' },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'tabs', type: 'Tab[]', description: 'Ordered tabs. Each has value, label, optional icon, optional disabled.' },
+  { name: 'value', type: 'string', description: 'Controlled active tab.' },
+  { name: 'defaultValue', type: 'string', description: 'Uncontrolled initial tab. Falls back to first tab.' },
+  { name: 'onChange', type: '(value: string) => void' },
+  { name: 'variant', type: '"underline" | "pill"', defaultValue: '"underline"' },
+  { name: 'fullWidth', type: 'boolean', defaultValue: 'false', description: 'Stretch tabs to fill container.' },
+]} />
+
+## Accessibility
+
+- Container: `role="tablist"` + optional `aria-label`.
+- Each tab: `role="tab"` + `aria-selected`.
+- Native `<button>` — full keyboard focus + activation.

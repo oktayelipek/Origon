@@ -1,0 +1,64 @@
+---
+title: Row
+---
+
+import { Row, BrandLogo, Icon, Graph } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Row
+
+Data list row composition — leading + title/subtitle + meta/metaSubtitle +
+trailing. Source: Figma `- Row` (`12:51134`) and `- Price Row` (`12:54723`).
+Interactive when `onClick` is provided.
+
+## Live preview
+
+<div style={{ display: 'flex', flexDirection: 'column', gap: 4, padding: 16, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 480 }}>
+  <Row
+    leading={<BrandLogo name="bitcoin" height={28} />}
+    title="Bitcoin"
+    subtitle="BTC"
+    meta="₺3,458,000"
+    metaSubtitle="+2.4%"
+    metaTone="success"
+    onClick={() => alert('Bitcoin')}
+  />
+  <Row
+    leading={<div style={{ width: 28, height: 28, borderRadius: 28, background: '#f0ae67' }} />}
+    title="Ethereum"
+    subtitle="ETH"
+    meta="₺124,800"
+    metaSubtitle="-1.1%"
+    metaTone="danger"
+    onClick={() => {}}
+  />
+  <Row
+    leading={<div style={{ width: 28, height: 28, borderRadius: 28, background: '#5d8e89' }} />}
+    title="Solana"
+    subtitle="SOL"
+    trailing={<Icon name="chevronRight" />}
+    meta="₺2,190"
+    metaSubtitle="+5.3%"
+    metaTone="success"
+    onClick={() => {}}
+  />
+  <Row
+    leading={<Icon name="star" size={24} />}
+    title="Static row (no onClick)"
+    subtitle="Not interactive"
+  />
+</div>
+
+## API
+
+<PropsTable rows={[
+  { name: 'title', type: 'ReactNode', description: 'Main label (required).' },
+  { name: 'subtitle', type: 'ReactNode', description: 'Secondary text under title.' },
+  { name: 'leading', type: 'ReactNode', description: 'Leading slot — icon, avatar, logo.' },
+  { name: 'trailing', type: 'ReactNode', description: 'Trailing slot — chevron, badge, action.' },
+  { name: 'meta', type: 'ReactNode', description: 'Right-aligned primary text (e.g., price).' },
+  { name: 'metaSubtitle', type: 'ReactNode', description: 'Right-aligned secondary text (e.g., change %).' },
+  { name: 'metaTone', type: '"default" | "success" | "danger"', defaultValue: '"default"', description: 'Color for metaSubtitle (typical: green for up, red for down).' },
+  { name: 'onClick', type: '() => void', description: 'When provided, row is rendered as a button with hover state.' },
+  { name: 'dense', type: 'boolean', defaultValue: 'false', description: 'Reduced vertical padding for dense lists.' },
+]} />

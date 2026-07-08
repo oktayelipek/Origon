@@ -1,0 +1,116 @@
+---
+title: Dropdown / Combo
+---
+
+import { Tabs } from 'nextra/components';
+import { Dropdown } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Dropdown / Combo
+
+Anchored select. Setting `combobox` turns it into a filterable combobox.
+Source: Figma `- Dropdown/Combo` (`12:85331`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [pair, setPair] = useState('BTCTRY');
+  const [country, setCountry] = useState('');
+  const pairs = [
+    { value: 'BTCTRY', label: 'BTC / TRY' },
+    { value: 'ETHTRY', label: 'ETH / TRY' },
+    { value: 'BNBTRY', label: 'BNB / TRY' },
+    { value: 'AVAXTRY', label: 'AVAX / TRY' },
+    { value: 'SOLTRY', label: 'SOL / TRY' },
+  ];
+  const countries = [
+    { value: 'tr', label: 'Türkiye' },
+    { value: 'de', label: 'Deutschland' },
+    { value: 'fr', label: 'France' },
+    { value: 'us', label: 'United States' },
+    { value: 'jp', label: 'Japan' },
+    { value: 'br', label: 'Brasil' },
+  ];
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 20, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 400 }}>
+      <Dropdown options={pairs} value={pair} onChange={setPair} placeholder="Choose a pair" />
+      <Dropdown options={countries} value={country} onChange={setCountry} placeholder="Choose a country" combobox />
+      <Dropdown options={pairs} placeholder="Disabled" disabled />
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'options', type: 'Array<{ value, label, disabled? }>', description: 'Values with human labels.' },
+  { name: 'value', type: 'T', description: 'Controlled selected value.' },
+  { name: 'onChange', type: '(value: T) => void', description: 'Called on selection.' },
+  { name: 'placeholder', type: 'string', defaultValue: '"Select…"', description: 'Shown when nothing is selected.' },
+  { name: 'combobox', type: 'boolean', defaultValue: 'false', description: 'When true, popover shows a search input that filters options.' },
+  { name: 'fullWidth', type: 'boolean', defaultValue: 'false', description: 'Stretch trigger + popover to parent width.' },
+  { name: 'disabled', type: 'boolean', defaultValue: 'false', description: 'Non-interactive.' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Dropdown } from '@origon/react';
+
+const pairs = [
+  { value: 'BTCTRY', label: 'BTC / TRY' },
+  { value: 'ETHTRY', label: 'ETH / TRY' },
+];
+
+<Dropdown options={pairs} value={pair} onChange={setPair} placeholder="Pair" />
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonDropdown<String>(
+  options: const [
+    OrigonDropdownOption(value: 'BTCTRY', label: 'BTC / TRY'),
+    OrigonDropdownOption(value: 'ETHTRY', label: 'ETH / TRY'),
+  ],
+  value: pair,
+  onChanged: (v) => setState(() => pair = v),
+  placeholder: 'Pair',
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+@State var pair: String? = "BTCTRY"
+
+OrigonDropdown(
+    options: [
+        OrigonDropdownOption(value: "BTCTRY", label: "BTC / TRY"),
+        OrigonDropdownOption(value: "ETHTRY", label: "ETH / TRY"),
+    ],
+    selection: $pair,
+    placeholder: "Pair"
+)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Behavior
+
+- Click outside or press `Escape` to close.
+- Trigger is a `<button aria-haspopup="listbox">`; popover uses `role="listbox"` with `role="option"` children.
+- Currently does not support keyboard navigation over options (arrow keys) — that arrives in v2.

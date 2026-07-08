@@ -1,0 +1,58 @@
+---
+title: Tooltip
+---
+
+import { Tooltip, Button } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+
+# Tooltip
+
+Hover/focus popover. Portals to `document.body`, auto-flips when it would
+overflow the viewport. Source: Figma `{FK-Tooltip}` (`11:2720`).
+
+## Live preview
+
+<div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, padding: 48, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, justifyContent: 'center' }}>
+  <Tooltip content="Places a limit order at your price">
+    <Button variant="outline">Hover me (top)</Button>
+  </Tooltip>
+  <Tooltip content="Fee schedule updated on July 15" side="bottom">
+    <Button variant="outline">Bottom</Button>
+  </Tooltip>
+  <Tooltip content="Learn more about margin trading in the docs" side="right">
+    <Button variant="outline">Right</Button>
+  </Tooltip>
+  <Tooltip content="Short label" side="left">
+    <Button variant="outline">Left</Button>
+  </Tooltip>
+</div>
+
+Hover any button — press Tab to see keyboard focus also triggers the tooltip.
+
+## API
+
+<PropsTable rows={[
+  { name: 'content', type: 'ReactNode', description: 'Body of the tooltip.' },
+  { name: 'children', type: 'ReactElement', description: 'The anchor. Must forward its ref and accept mouse/focus events.' },
+  { name: 'side', type: '"top" | "bottom" | "left" | "right"', defaultValue: '"top"', description: 'Preferred placement. Auto-flips if it would overflow.' },
+  { name: 'delay', type: 'number', defaultValue: '250', description: 'Show delay in milliseconds.' },
+  { name: 'disabled', type: 'boolean', description: 'Suppress the tooltip without unmounting.' },
+]} />
+
+## Behavior
+
+- Positioning is `position: fixed` — the tooltip is anchored to the trigger
+  via `getBoundingClientRect()` measurements.
+- Auto-flips when the preferred side would overflow the viewport, then clamps
+  to a 4px viewport margin.
+- Portals into `document.body` so the tooltip escapes overflow: hidden
+  parents.
+- Rendered as `role="tooltip"`.
+
+## Do / don't
+
+- ✅ Use for icon-only buttons to explain their purpose (with `aria-label`
+  on the button too).
+- ✅ Use to expand acronyms or explain metrics.
+- ❌ Don't put critical information in a tooltip — mobile has no hover.
+- ❌ Don't nest interactive elements inside a tooltip. Use a Popover for that.

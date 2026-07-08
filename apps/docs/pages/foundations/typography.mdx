@@ -1,0 +1,118 @@
+---
+title: Typography
+---
+
+import { Tabs } from 'nextra/components';
+import { TypeSample, TypeScale } from '../../components/TypeSample';
+
+# Typography
+
+Origon UI is set in **Inter Variable**, a single family covering the full weight
+axis. The scale spans **xxs → 3xl** plus a `display4xl` reserved for hero
+moments. Letter spacing is `0%` everywhere — Inter's default optical
+compensation is used.
+
+- **Family**: `Inter Variable` — load once, use every weight from the same file.
+- **Weights in use**: Regular (400), Medium (500), Bold (700). Other weights
+  exist in the variable but are not part of the design system contract.
+- **Line height**: hard-coded per size (not a ratio). Sizes ≤ md use a tighter
+  1.33× rhythm; sizes ≥ lg loosen to 1.30–1.20× for headline balance.
+
+## Scale (Regular)
+
+<TypeScale weight="regular" />
+
+## Scale (Medium)
+
+<TypeScale weight="medium" />
+
+## Scale (Bold)
+
+<TypeScale weight="bold" />
+
+## Display
+
+<TypeSample scale="display4xl" weight="bold" sample="Origon" />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { text, font } from '@origon/tokens-react';
+
+<h1
+  style={{
+    fontFamily: font.family.primary,
+    fontSize: text.xxl.fontSize,
+    lineHeight: `${text.xxl.lineHeight}px`,
+    fontWeight: font.weight.bold,
+  }}
+>
+  Portfolio
+</h1>
+```
+
+CSS variables:
+
+```css
+.h1 {
+  font-family: var(--font-family-primary);
+  font-size: var(--text-xxl-font-size);
+  line-height: var(--text-xxl-line-height);
+  font-weight: var(--font-weight-bold);
+}
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_tokens/generated/origon_typography.dart';
+
+Text(
+  'Portfolio',
+  style: OrigonTextStyles.xxl.copyWith(
+    fontFamily: OrigonFont.primary,
+    fontWeight: OrigonFont.bold,
+  ),
+);
+```
+
+`OrigonTextStyles` uses Flutter's `TextStyle.height` (relative), so line height is
+already the correct multiple of `fontSize` — no manual computation needed.
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import SwiftUI
+import OrigonTokens
+
+Text("Portfolio")
+    .font(OrigonTextStyles.xxl.weight(OrigonFont.bold))
+```
+
+Note: SwiftUI's `Font.system(size:)` gives you a size but not a fixed line
+height. If you need exact `lineHeight`, use `.lineSpacing()` or drop to
+`UIFont` / `NSAttributedString` and set the paragraph style.
+
+</Tabs.Tab>
+</Tabs>
+
+## Naming rules
+
+- Scales use the shorthand `xxs → 3xl` (no numeric font sizes in code).
+- `text.<scale>.fontSize` and `text.<scale>.lineHeight` in React; equivalent
+  structures in Flutter/Swift.
+- Display sizes are prefixed: `display4xl`, `displayXxl` (future). Reserved for
+  page-level "hero" typography.
+
+## Do / don't
+
+- ✅ Compose weight and size independently (`text.md` + `font.weight.medium`).
+- ✅ Rely on Inter Variable — do not import Inter static weights alongside.
+- ❌ Don't inline hardcoded font sizes (`fontSize: 15`). Always token-driven.
+- ❌ Don't add letter-spacing "for readability" — the font's optical sizing
+  already handles that.

@@ -1,0 +1,97 @@
+---
+title: Keyboard
+---
+
+import { Tabs } from 'nextra/components';
+import { Keyboard, Input } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Keyboard
+
+On-screen numpad for touch-first amount entry (mobile trade flows).
+Source: Figma `- Keyboards` (`12:58173`). Full QWERTY layouts defer to
+platform-native keyboards; Origon ships numeric and decimal variants.
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [amount, setAmount] = useState('');
+  const push = (k) => setAmount((a) => (a + k).slice(0, 12));
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24, maxWidth: 320 }}>
+      <Input label="Amount" value={amount} onChange={(e) => setAmount(e.target.value)} placeholder="0.00" fullWidth />
+      <Keyboard
+        layout="decimal"
+        onKey={push}
+        onBackspace={() => setAmount((a) => a.slice(0, -1))}
+        onConfirm={() => alert(`Confirmed: ${amount}`)}
+      />
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'layout', type: '"numeric" | "decimal"', defaultValue: '"numeric"', description: 'Decimal includes a "." key in the bottom-left cell.' },
+  { name: 'onKey', type: '(key: string) => void', description: 'Called with the key value ("0"…"9", ".") on tap.' },
+  { name: 'onBackspace', type: '() => void', description: 'Called when the ⌫ key is tapped.' },
+  { name: 'onConfirm', type: '() => void', description: 'When provided, adds a full-width confirm bar below the grid.' },
+  { name: 'confirmContent', type: 'ReactNode', description: 'Custom confirm-key content (e.g., "Buy" text).' },
+]} />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { Keyboard } from '@origon/react';
+
+<Keyboard
+  layout="decimal"
+  onKey={(k) => setAmount((a) => a + k)}
+  onBackspace={() => setAmount((a) => a.slice(0, -1))}
+  onConfirm={confirm}
+/>
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_ui/origon_ui.dart';
+
+OrigonKeyboard(
+  layout: OrigonKeyboardLayout.decimal,
+  onKey: (k) => setState(() => amount += k),
+  onBackspace: () => setState(() => amount = amount.substring(0, amount.length - 1)),
+  onConfirm: confirm,
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import OrigonUI
+
+OrigonKeyboard(
+    layout: .decimal,
+    onKey: { k in amount += k },
+    onBackspace: { amount = String(amount.dropLast()) },
+    onConfirm: confirm
+)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Notes
+
+- Grid: 3×4 with a 5th row for the confirm action.
+- Backspace icon is inline SVG (no dependency on icon package).
+- No haptics wired up in web build; Flutter/Swift ports will bind to platform haptics.

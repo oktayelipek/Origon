@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Cache pnpm store
+        uses: actions/cache@v4
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            pnpm-${{ runner.os }}-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build tokens
+        run: pnpm build:tokens
+
+      - name: Test — React components
+        run: pnpm --filter @origon/react test
+
+      - name: Build docs
+        run: pnpm --filter @origon/docs build
+        env:
+          NEXT_TELEMETRY_DISABLED: '1'
+
+  flutter:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node (for token build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.24.x'
+          channel: 'stable'
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Build tokens (generated Dart)
+        run: pnpm build:tokens
+      - name: Flutter tokens analyze + test
+        working-directory: packages/tokens-flutter
+        run: |
+          flutter pub get
+          flutter analyze --no-fatal-warnings || true
+          flutter test
+      - name: Flutter UI analyze + test
+        working-directory: packages/flutter
+        run: |
+          flutter pub get
+          flutter analyze --no-fatal-warnings || true
+          flutter test
+
+  swift:
+    runs-on: macos-14
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node (for token build)
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Build tokens (generated Swift)
+        run: pnpm build:tokens
+      - name: Swift tokens build + test
+        working-directory: packages/tokens-swift
+        run: |
+          swift build
+          swift test
+      - name: Swift UI build + test
+        working-directory: packages/swift
+        run: |
+          swift build
+          swift test

@@ -1,0 +1,69 @@
+---
+title: Segmented Control
+---
+
+import { SegmentedControl } from '@origon/react';
+import { PropsTable } from '../../components/PropsTable';
+import { useState } from 'react';
+
+# Segmented Control
+
+Mutually-exclusive choice group. Common uses: chart timespans, sort orders,
+view modes. Distinct from `Tabs` — always renders as a rounded pill.
+Source: Figma `- Segmented Control` (`12:49453`).
+
+## Live preview
+
+<Demo />
+
+export const Demo = () => {
+  const [span, setSpan] = useState('1D');
+  const [view, setView] = useState('all');
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 24, padding: 24, background: 'var(--semantic-level-basement, #0b0f1a)', borderRadius: 12, marginBottom: 24 }}>
+      <div>
+        <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Chart timespan (small)</div>
+        <SegmentedControl
+          size="small"
+          value={span}
+          onChange={setSpan}
+          options={[
+            { value: '1D', label: '1D' },
+            { value: '1W', label: '1W' },
+            { value: '1M', label: '1M' },
+            { value: '3M', label: '3M' },
+            { value: '1Y', label: '1Y' },
+            { value: 'ALL', label: 'ALL' },
+          ]}
+        />
+      </div>
+      <div>
+        <div style={{ fontSize: 12, opacity: 0.7, marginBottom: 8 }}>Order filter (medium, full width)</div>
+        <SegmentedControl
+          fullWidth
+          value={view}
+          onChange={setView}
+          options={[
+            { value: 'all', label: 'All' },
+            { value: 'open', label: 'Open' },
+            { value: 'filled', label: 'Filled' },
+            { value: 'cancelled', label: 'Cancelled' },
+          ]}
+        />
+      </div>
+    </div>
+  );
+};
+
+## API
+
+<PropsTable rows={[
+  { name: 'options', type: 'SegmentedOption[]', description: 'Choices. Each has value, label, optional icon/disabled.' },
+  { name: 'value', type: 'T', description: 'Controlled selected value.' },
+  { name: 'defaultValue', type: 'T', description: 'Uncontrolled initial value.' },
+  { name: 'onChange', type: '(value: T) => void' },
+  { name: 'size', type: '"small" | "medium"', defaultValue: '"medium"' },
+  { name: 'fullWidth', type: 'boolean', defaultValue: 'false' },
+]} />
+
+Rendered as `role="radiogroup"` with each option `role="radio"` + `aria-checked`.

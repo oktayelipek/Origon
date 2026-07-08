@@ -1,0 +1,45 @@
+node_modules/
+.pnpm-store/
+.turbo/
+dist/
+build/
+.next/
+out/
+storybook-static/
+
+# Flutter build artefacts (safe to regen)
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+packages/flutter/build/
+packages/flutter/ios/Pods/
+packages/flutter/android/.gradle/
+
+# Swift build artefacts (path-specific so we don't collide with `packages/` monorepo dir on case-insensitive filesystems)
+.build/
+packages/swift/Packages/
+packages/tokens-swift/Packages/
+xcuserdata/
+DerivedData/
+.swiftpm/
+
+# Editor
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.log
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# NOTE: We intentionally commit `packages/tokens-*/…/generated/`. These hold
+# both regeneratable code (TS/Dart/Swift) AND runtime-required SVG assets
+# (icons + logos). Committing them means fresh clones don't need a Figma
+# token to build. Regenerate any time via `pnpm build:tokens` / `sync:icons`.

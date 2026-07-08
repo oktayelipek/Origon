@@ -1,0 +1,80 @@
+---
+title: Spacing
+---
+
+import { Tabs } from 'nextra/components';
+import { SpacingScale } from '../../components/SpacingSample';
+
+# Spacing
+
+Spacing tokens drive padding, gaps, and vertical rhythm. The scale is
+**T-shirt sized** (xxs → xxl) with a jump to **4xl, 5xl, …** for section-level
+layout gutters.
+
+> **Partial import.** The Metrics variable collection in Figma also defines
+> `lg, 2lg, 3lg, 4lg, 6lg, 7lg, 8lg, 9lg`. These will land once the Metrics
+> page is synced.
+
+<SpacingScale />
+
+## Usage
+
+<Tabs items={['React', 'Flutter', 'Swift']}>
+<Tabs.Tab>
+
+```tsx
+import { spacing } from '@origon/tokens-react';
+
+<div style={{ padding: spacing.md, gap: spacing.xs }}>
+  {/* … */}
+</div>
+```
+
+CSS variables:
+
+```css
+.card {
+  padding: var(--spacing-md);
+  gap: var(--spacing-xs);
+}
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```dart
+import 'package:origon_tokens/generated/origon_spacing.dart';
+
+Padding(
+  padding: const EdgeInsets.all(OrigonSpacing.md),
+  child: Column(
+    spacing: OrigonSpacing.xs,
+    children: [...],
+  ),
+);
+```
+
+</Tabs.Tab>
+<Tabs.Tab>
+
+```swift
+import SwiftUI
+import OrigonTokens
+
+VStack(spacing: OrigonSpacing.xs) {
+    // …
+}
+.padding(OrigonSpacing.md)
+```
+
+</Tabs.Tab>
+</Tabs>
+
+## Do / don't
+
+- ✅ Use `spacing.xxs / xs / sm` for intra-component gaps (icon-to-label, chip
+  padding, form field spacing).
+- ✅ Use `spacing.md / xl` for card/section padding.
+- ✅ Use `spacing.4xl / 5xl` for hero and page-level margins.
+- ❌ Don't invent intermediate values (`10`, `14`). If the scale doesn't have
+  what you need, propose a new token in Figma first.
