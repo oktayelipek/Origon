@@ -16,10 +16,10 @@ void main() {
         OrigonThemes.hisseDark,  OrigonThemes.hisseLight,
         OrigonThemes.globalDark, OrigonThemes.globalLight,
       ];
-      // Not all pairs must differ, but the set as a whole should have
-      // meaningful variation in `button.primary`.
-      final primaries = combos.map((t) => t.semantic.button.primary.value).toSet();
-      expect(primaries.length, greaterThanOrEqualTo(3));
+      // Brands differ in `brand.primary` (Kripto/Global share #005fae,
+      // Hisse uses #07ac92 — at least 2 distinct values across all 6 modes).
+      final primaries = combos.map((t) => t.semantic.brand.primary.value).toSet();
+      expect(primaries.length, greaterThanOrEqualTo(2));
     });
 
     testWidgets('OrigonTheme.of() reads back what was provided', (tester) async {

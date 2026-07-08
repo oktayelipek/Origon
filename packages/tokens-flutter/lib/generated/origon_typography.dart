@@ -18,9 +18,6 @@ class OrigonTextStyles {
   OrigonTextStyles._();
 
   static const TextStyle d3xl = TextStyle(fontSize: 30.0, height: 1.2000);
-  static const TextStyle displayLg = TextStyle(fontSize: undefined.0, height: NaN);
-  static const TextStyle displayMd = TextStyle(fontSize: 30.0, height: NaN);
-  static const TextStyle displaySm = TextStyle(fontSize: 26.0, height: NaN);
   static const TextStyle xxl = TextStyle(fontSize: 24.0, height: 1.2500);
   static const TextStyle xl = TextStyle(fontSize: 20.0, height: 1.3000);
   static const TextStyle lg = TextStyle(fontSize: 17.0, height: 1.2941);
@@ -28,5 +25,4 @@ class OrigonTextStyles {
   static const TextStyle sm = TextStyle(fontSize: 13.0, height: 1.3846);
   static const TextStyle xs = TextStyle(fontSize: 11.0, height: 1.2727);
   static const TextStyle xxs = TextStyle(fontSize: 10.0, height: 1.4000);
-  static const TextStyle text4xs = TextStyle(fontSize: 10.0, height: NaN);
 }

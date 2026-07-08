@@ -1,7 +1,7 @@
 import React, { forwardRef, type ReactNode, type CSSProperties } from 'react';
 import { colors, semantic, spacing, text, font } from '@origon/tokens-react';
 
-export interface RowProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface RowProps extends Omit<React.HTMLAttributes<HTMLDivElement>, 'title'> {
   /** Leading element (icon, avatar, logo). */
   leading?: ReactNode;
   /** Main label. */
@@ -91,11 +91,11 @@ export const Row = forwardRef<HTMLDivElement, RowProps>(function Row(
       <button
         ref={ref as any}
         type="button"
-        onClick={onClick}
+        onClick={onClick as any}
         style={containerStyle}
         onMouseEnter={(e) => { (e.currentTarget as HTMLElement).style.background = colors.blueGray[200]; }}
         onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
-        {...rest}
+        {...(rest as any)}
       >
         {content}
       </button>

@@ -249,8 +249,10 @@ function svgWithCurrentColor(svg) {
     .replace(/fill="#[0-9a-fA-F]{6,8}"/g, 'fill="currentColor"')
     .replace(/stroke="#[0-9a-fA-F]{6,8}"/g, 'stroke="currentColor"');
 }
-function dartId(s) { return /^[a-zA-Z_]/.test(s) ? s : `d${s}`; }
-function swiftId(s) { return /^[a-zA-Z_]/.test(s) ? s : `d${s}`; }
+const DART_RESERVED = new Set(['abstract','as','assert','async','await','break','case','catch','class','const','continue','covariant','default','deferred','do','dynamic','else','enum','export','extends','extension','external','factory','false','final','finally','for','function','get','hide','if','implements','import','in','interface','is','late','library','mixin','new','null','of','on','operator','part','required','rethrow','return','set','show','static','super','switch','sync','this','throw','true','try','typedef','var','void','while','with','yield']);
+const SWIFT_RESERVED = new Set(['associatedtype','class','deinit','enum','extension','fileprivate','func','import','init','inout','internal','let','open','operator','private','protocol','public','static','struct','subscript','typealias','var','break','case','continue','default','defer','do','else','fallthrough','for','guard','if','in','repeat','return','switch','where','while','as','Any','catch','false','is','nil','rethrows','super','self','Self','throw','throws','true','try','associativity','convenience','dynamic','didSet','final','get','infix','indirect','lazy','left','mutating','none','nonmutating','optional','override','postfix','precedence','prefix','Protocol','required','right','set','Type','unowned','weak','willSet']);
+function dartId(s) { const n = /^[a-zA-Z_]/.test(s) ? s : `d${s}`; return DART_RESERVED.has(n) ? `${n}_` : n; }
+function swiftId(s) { const n = /^[a-zA-Z_]/.test(s) ? s : `d${s}`; return SWIFT_RESERVED.has(n) ? `\`${n}\`` : n; }
 
 // --- Flutter ---
 const FLUTTER_SVG_DIR = path.join(ROOT, 'packages/tokens-flutter/lib/generated/icons');

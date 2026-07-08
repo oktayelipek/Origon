@@ -1,7 +1,7 @@
 import React, { forwardRef, type CSSProperties, type ReactNode } from 'react';
 import { colors, semantic, radius, spacing, text, font } from '@origon/tokens-react';
 
-export interface FilterProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children'> {
+export interface FilterProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'value'> {
   label: string;
   value?: ReactNode;
   /** When provided, shows a dismiss (×) button and calls this on click. */

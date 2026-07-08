@@ -121,7 +121,7 @@ export function PinInput({
           return (
             <input
               key={i}
-              ref={(el) => (inputsRef.current[i] = el)}
+              ref={(el) => { inputsRef.current[i] = el; }}
               type={mask ? 'password' : 'tel'}
               inputMode="numeric"
               autoComplete="one-time-code"

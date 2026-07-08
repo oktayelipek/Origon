@@ -18,5 +18,10 @@ let package = Package(
                 .process("Resources"),
             ]
         ),
+        .testTarget(
+            name: "OrigonTokensTests",
+            dependencies: ["OrigonTokens"],
+            path: "Tests/OrigonTokensTests"
+        ),
     ]
 )

@@ -16,15 +16,6 @@ export const text = {
     fontSize: 30,
     lineHeight: 36,
   },
-  displayLg: {
-    lineHeight: 44,
-  },
-  displayMd: {
-    fontSize: 30,
-  },
-  displaySm: {
-    fontSize: 26,
-  },
   xxl: {
     fontSize: 24,
     lineHeight: 30,
@@ -52,8 +43,5 @@ export const text = {
   xxs: {
     fontSize: 10,
     lineHeight: 14,
-  },
-  text4xs: {
-    fontSize: 10,
   },
 } as const;

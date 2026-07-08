@@ -118,7 +118,11 @@ function emitReact(tokens) {
   // Typography
   if (tokens.text || tokens.font) {
     const font = tokens.font ? extractLeafValues(tokens.font) : {};
-    const text = tokens.text ? extractLeafValues(tokens.text) : {};
+    const textRaw = tokens.text ? extractLeafValues(tokens.text) : {};
+    // Drop entries missing fontSize or lineHeight — Figma may hold partial styles.
+    const text = Object.fromEntries(
+      Object.entries(textRaw).filter(([, d]) => typeof d?.fontSize === 'number' && typeof d?.lineHeight === 'number'),
+    );
     const body = `${BANNER}export const font = ${serializeJs(font)} as const;\n\nexport const text = ${serializeJs(text)} as const;\n`;
     writeFileSync(path.join(outDir, 'typography.ts'), body);
     exports.push("export * from './typography';");
@@ -438,6 +442,7 @@ function emitDartTypography(outDir, tokens) {
   for (const [scale, dims] of Object.entries(text)) {
     const size = dims.fontSize;
     const lh = dims.lineHeight;
+    if (typeof size !== 'number' || typeof lh !== 'number') continue;
     lines.push(
       `  static const TextStyle ${dartId(scale)} = TextStyle(fontSize: ${size}.0, height: ${(lh / size).toFixed(4)});`,
     );
@@ -655,6 +660,7 @@ function emitSwiftTypography(outDir, tokens) {
   lines.push('');
   lines.push('public enum OrigonTextStyles {');
   for (const [scale, dims] of Object.entries(text)) {
+    if (typeof dims.fontSize !== 'number' || typeof dims.lineHeight !== 'number') continue;
     lines.push(
       `    public static let ${swiftId(scale)} = Font.system(size: ${dims.fontSize}) // lineHeight: ${dims.lineHeight}`,
     );
@@ -719,12 +725,16 @@ function kebab(s) {
 function cap(s) {
   return s.charAt(0).toUpperCase() + s.slice(1);
 }
+const DART_RESERVED = new Set(['abstract','as','assert','async','await','break','case','catch','class','const','continue','covariant','default','deferred','do','dynamic','else','enum','export','extends','extension','external','factory','false','final','finally','for','function','get','hide','if','implements','import','in','interface','is','late','library','mixin','new','null','of','on','operator','part','required','rethrow','return','set','show','static','super','switch','sync','this','throw','true','try','typedef','var','void','while','with','yield']);
+const SWIFT_RESERVED = new Set(['associatedtype','class','deinit','enum','extension','fileprivate','func','import','init','inout','internal','let','open','operator','private','protocol','public','static','struct','subscript','typealias','var','break','case','continue','default','defer','do','else','fallthrough','for','guard','if','in','repeat','return','switch','where','while','as','Any','catch','false','is','nil','rethrows','super','self','Self','throw','throws','true','try']);
 function dartId(s) {
-  // Dart identifiers can't start with a digit.
-  return /^[a-zA-Z_]/.test(s) ? s : `d${s}`;
+  // Dart identifiers can't start with a digit; suffix reserved words.
+  const n = /^[a-zA-Z_]/.test(s) ? s : `d${s}`;
+  return DART_RESERVED.has(n) ? `${n}_` : n;
 }
 function swiftId(s) {
-  return /^[a-zA-Z_]/.test(s) ? s : `d${s}`;
+  const n = /^[a-zA-Z_]/.test(s) ? s : `d${s}`;
+  return SWIFT_RESERVED.has(n) ? `\`${n}\`` : n;
 }
 function countAllLeaves(tokens) {
   let n = 0;

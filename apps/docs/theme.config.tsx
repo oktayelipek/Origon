@@ -24,9 +24,6 @@ const config: DocsThemeConfig = {
       />
     </>
   ),
-  useNextSeoProps() {
-    return { titleTemplate: '%s – Origon UI' };
-  },
   sidebar: {
     defaultMenuCollapseLevel: 2,
   },

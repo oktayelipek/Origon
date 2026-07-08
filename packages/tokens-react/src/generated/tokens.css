@@ -332,9 +332,6 @@
   --font-weight-bold: 700;
   --text-3xl-font-size: 30px;
   --text-3xl-line-height: 36px;
-  --text-display-lg-line-height: 44px;
-  --text-display-md-font-size: 30px;
-  --text-display-sm-font-size: 26px;
   --text-xxl-font-size: 24px;
   --text-xxl-line-height: 30px;
   --text-xl-font-size: 20px;
@@ -349,7 +346,6 @@
   --text-xs-line-height: 14px;
   --text-xxs-font-size: 10px;
   --text-xxs-line-height: 14px;
-  --text-text4xs-font-size: 10px;
   --semantic-level-level0: #070910;
   --semantic-level-level1: #0b0f1a;
   --semantic-level-level2: #131f2f;
