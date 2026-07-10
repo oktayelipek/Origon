@@ -10,7 +10,9 @@
     "./icons": "./src/Icon/generated/index.ts",
     "./logos": "./src/Logo/generated/index.ts"
   },
-  "files": ["src"],
+  "files": [
+    "src"
+  ],
   "scripts": {
     "test": "vitest run",
     "test:watch": "vitest",
@@ -25,6 +27,7 @@
     "@origon/tokens-react": "workspace:*"
   },
   "devDependencies": {
+    "@figma/code-connect": "^1.4.9",
     "@storybook/addon-essentials": "^8.6.18",
     "@storybook/addon-interactions": "^8.6.18",
     "@storybook/addon-links": "^8.6.18",

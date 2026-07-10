@@ -1,0 +1,10 @@
+{
+  "codeConnect": {
+    "include": ["src/**/*.figma.tsx"],
+    "exclude": ["node_modules/**", "**/*.stories.tsx"],
+    "parser": "react",
+    "documentUrlSubstitutions": {
+      "OriginUI": "https://www.figma.com/design/57b5pxiONTgoI4w4fvaNbA/Origon-UI"
+    }
+  }
+}
