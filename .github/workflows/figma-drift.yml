@@ -1,0 +1,140 @@
+name: Figma drift detection
+
+on:
+  schedule:
+    # Weekdays 08:00 UTC (11:00 Istanbul).
+    - cron: '0 8 * * 1-5'
+  workflow_dispatch:
+
+concurrency:
+  group: figma-drift
+  cancel-in-progress: true
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Pull latest tokens from Figma
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: pnpm sync:figma
+
+      - name: Rebuild platform outputs against fresh source
+        run: pnpm build:tokens
+
+      - name: Check for token drift
+        id: drift
+        run: |
+          if git diff --quiet tokens/source packages/tokens-react/src/generated packages/tokens-flutter/lib/generated packages/tokens-swift/Sources/OrigonTokens/generated; then
+            echo "has_drift=false" >> "$GITHUB_OUTPUT"
+            echo "No drift."
+          else
+            echo "has_drift=true" >> "$GITHUB_OUTPUT"
+            node scripts/format-drift-report.mjs > drift-report.md
+            cat drift-report.md
+          fi
+
+      - name: Open PR with token drift
+        if: steps.drift.outputs.has_drift == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'chore(tokens): sync latest values from Figma'
+          title: 'chore(tokens): Figma drift — auto-synced'
+          body-path: drift-report.md
+          branch: figma-drift/auto-sync
+          delete-branch: true
+          labels: figma-drift, tokens
+          add-paths: |
+            tokens/source
+            packages/tokens-react/src/generated
+            packages/tokens-flutter/lib/generated
+            packages/tokens-swift/Sources/OrigonTokens/generated
+
+      - name: Reset tree for variant parity step
+        run: git checkout -- .
+
+      - name: Check component variant parity
+        id: variants
+        env:
+          FIGMA_TOKEN: ${{ secrets.FIGMA_TOKEN }}
+        run: |
+          set +e
+          node scripts/detect-variant-parity.mjs > variant-parity.log
+          echo "exit_code=$?" >> "$GITHUB_OUTPUT"
+          set -e
+          cat variant-parity.log
+
+      - name: Open issue for variant drift
+        if: steps.variants.outputs.exit_code == '1'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const log = fs.readFileSync('variant-parity.log', 'utf8');
+            const report = JSON.parse(fs.readFileSync('variant-parity-report.json', 'utf8'));
+
+            const title = `[figma-drift] ${report.length} component variant mismatch(es)`;
+            const body = [
+              '## Component variant drift',
+              '',
+              'The Figma design file has variant options that no longer match the exported TypeScript union types (or vice versa).',
+              '',
+              '```',
+              log,
+              '```',
+              '',
+              'See `variant-parity-report.json` in the workflow run for the full machine-readable breakdown.',
+              '',
+              '_Auto-opened by the `figma-drift` workflow. Close after resolving._',
+            ].join('\n');
+
+            // Find an existing open issue with the same auto-tag so we update instead of duplicate.
+            const { data: existing } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: 'figma-drift,variants',
+            });
+            if (existing.length) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing[0].number,
+                title,
+                body,
+              });
+              console.log(`Updated existing issue #${existing[0].number}`);
+            } else {
+              const { data: created } = await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['figma-drift', 'variants'],
+              });
+              console.log(`Opened issue #${created.number}`);
+            }

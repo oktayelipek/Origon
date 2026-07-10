@@ -15,6 +15,8 @@
     "scaffold:code-connect": "node scripts/scaffold-code-connect.mjs",
     "figma:code-connect:publish": "pnpm --filter @origon/react exec figma connect publish",
     "figma:code-connect:parse": "pnpm --filter @origon/react exec figma connect parse",
+    "figma:variant-parity": "node scripts/detect-variant-parity.mjs",
+    "figma:drift-report": "node scripts/format-drift-report.mjs",
     "dev": "turbo run dev",
     "build": "turbo run build",
     "lint": "turbo run lint",
