@@ -1,6 +1,6 @@
 {
   "name": "@origon/tokens-react",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Origon UI design tokens for React / TypeScript (generated).",
   "type": "module",
   "repository": {

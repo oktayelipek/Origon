@@ -1,6 +1,6 @@
 {
   "name": "@origon/react",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "Origon UI — React component library (canonical implementation).",
   "type": "module",
   "repository": {
