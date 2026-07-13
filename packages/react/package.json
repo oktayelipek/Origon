@@ -1,8 +1,17 @@
 {
   "name": "@origon/react",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Origon UI — React component library (canonical implementation).",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oktayelipek/Origon.git",
+    "directory": "packages/react"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {

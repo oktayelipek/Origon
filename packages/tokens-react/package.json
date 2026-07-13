@@ -1,8 +1,17 @@
 {
   "name": "@origon/tokens-react",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Origon UI design tokens for React / TypeScript (generated).",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/oktayelipek/Origon.git",
+    "directory": "packages/tokens-react"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
   "main": "./src/generated/index.ts",
   "types": "./src/generated/index.ts",
   "exports": {

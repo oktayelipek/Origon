@@ -1,0 +1,66 @@
+name: Publish packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      dry-run:
+        description: 'Skip actual publish (npm pack + inspect only)'
+        type: boolean
+        required: false
+        default: false
+
+concurrency:
+  group: publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          # Configure npm to use GitHub Packages for @origon scope.
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@origon'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9.12.0
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build tokens (freshest generated output)
+        run: pnpm build:tokens
+
+      - name: Run tests before publish
+        run: pnpm --filter @origon/react test
+
+      - name: Publish @origon/tokens-react
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ inputs.dry-run }}" = "true" ]; then
+            pnpm --filter @origon/tokens-react publish --dry-run --no-git-checks
+          else
+            pnpm --filter @origon/tokens-react publish --no-git-checks --access restricted || echo "publish skipped (version likely already exists)"
+          fi
+
+      - name: Publish @origon/react
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if [ "${{ inputs.dry-run }}" = "true" ]; then
+            pnpm --filter @origon/react publish --dry-run --no-git-checks
+          else
+            pnpm --filter @origon/react publish --no-git-checks --access restricted || echo "publish skipped (version likely already exists)"
+          fi

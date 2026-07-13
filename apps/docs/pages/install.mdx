@@ -1,0 +1,123 @@
+# Installing Origon UI
+
+Origon is published to **GitHub Packages** under the `@origon` scope. Internal BtcTurk consumers add it to a Node.js project in three steps.
+
+## 1. Authenticate to GitHub Packages
+
+Create a Personal Access Token (classic) with `read:packages` scope at https://github.com/settings/tokens.
+
+Add it to your shell environment (`~/.zshrc` / `~/.bashrc`):
+
+```sh
+export NODE_AUTH_TOKEN=ghp_your_token_here
+```
+
+## 2. Configure `.npmrc`
+
+In the **root of the consumer repo** (not committed if the token is inline; safe if using `${NODE_AUTH_TOKEN}`):
+
+```ini
+@origon:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}
+```
+
+## 3. Install
+
+```sh
+pnpm add @origon/react @origon/tokens-react
+# or npm/yarn — pnpm is recommended.
+```
+
+Peer deps: `react ^18 || ^19`, `react-dom ^18 || ^19`.
+
+## Consuming
+
+```tsx
+import { Button, Chip } from '@origon/react';
+import '@origon/tokens-react/css';         // base tokens
+import '@origon/tokens-react/themes/css';  // 6 brand × mode variants
+
+export default function App() {
+  return (
+    <>
+      <Button variant="primary">Trade</Button>
+      <Chip size="sm" selected>1D</Chip>
+    </>
+  );
+}
+```
+
+### Runtime theme switching
+
+```tsx
+import { applyTheme } from '@origon/tokens-react/themes';
+
+applyTheme({ brand: 'hisse', theme: 'light' });
+// The entire tree recolors via CSS variables — no re-render.
+```
+
+## Next.js consumers
+
+Origon publishes TypeScript source (not pre-compiled JS). Add both packages to Next's `transpilePackages`:
+
+```js
+// next.config.mjs
+export default {
+  transpilePackages: ['@origon/react', '@origon/tokens-react'],
+};
+```
+
+## CI consumers
+
+In GitHub Actions:
+
+```yaml
+- uses: actions/setup-node@v4
+  with:
+    node-version: '20'
+    registry-url: 'https://npm.pkg.github.com'
+    scope: '@origon'
+- run: pnpm install
+  env:
+    NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```
+
+`GITHUB_TOKEN` on any repo in the same organisation as Origon can read the packages.
+
+## Upgrading
+
+Origon uses semantic-release — every merged PR to `main` bumps `@origon/react` and `@origon/tokens-react` in lockstep. See `CHANGELOG.md` in the repo for what changed between versions.
+
+Pin to a specific minor for stability:
+
+```json
+{
+  "dependencies": {
+    "@origon/react": "~0.1.0",
+    "@origon/tokens-react": "~0.1.0"
+  }
+}
+```
+
+## Flutter / Swift
+
+These platforms bypass npm — pull them via their native package managers:
+
+- **Flutter**: add to `pubspec.yaml` with a git reference to a tagged commit:
+  ```yaml
+  dependencies:
+    origon_ui:
+      git:
+        url: https://github.com/oktayelipek/Origon
+        path: packages/flutter
+        ref: v0.1.0
+  ```
+- **Swift**: add via SPM with the same git URL and tag.
+
+## Troubleshooting
+
+**`401 Unauthorized` on install** — `NODE_AUTH_TOKEN` isn't set or lacks `read:packages` scope. Re-check step 1.
+
+**Types not resolving** — ensure `transpilePackages` is set (Next.js) or your bundler is configured to include the `@origon` scope in TS compilation.
+
+**Version conflict on peer deps** — Origon pins React ^18. If you're on React 19, install with `--force` (public API is compatible) and file an issue if you hit a runtime edge case.
