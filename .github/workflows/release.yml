@@ -14,6 +14,7 @@ permissions:
   issues: write          # For issue comments
   pull-requests: write   # For PR comments
   id-token: write        # For provenance if npm publish
+  packages: write        # For GitHub Packages publish
 
 jobs:
   release:
@@ -35,6 +36,8 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@origon'
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -53,5 +56,6 @@ jobs:
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HUSKY: 0
         run: pnpm release

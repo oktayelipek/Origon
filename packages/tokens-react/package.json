@@ -26,6 +26,10 @@
     "./themes/global-dark": "./src/generated/themes/global-dark.ts",
     "./themes/global-light": "./src/generated/themes/global-light.ts"
   },
-  "files": ["src/generated"],
-  "sideEffects": ["*.css"]
+  "files": [
+    "src/generated"
+  ],
+  "sideEffects": [
+    "*.css"
+  ]
 }
