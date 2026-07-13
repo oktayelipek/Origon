@@ -36,8 +36,15 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://npm.pkg.github.com'
-          scope: '@origon'
+
+      - name: Configure npm auth for GitHub Packages
+        run: |
+          cat > ~/.npmrc <<EOF
+          @origon:registry=https://npm.pkg.github.com/
+          //npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+          always-auth=true
+          EOF
+          echo "@origon:registry=https://npm.pkg.github.com/" >> ~/.pnpmrc || true
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
