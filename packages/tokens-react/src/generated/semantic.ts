@@ -10,17 +10,11 @@ export const semantic = {
     level5: "#21374a",
     level6: "#4c5d72",
     alpha: {
+      level1Alpha0: "#07091000",
       level1Alpha80: "#070910cc",
     },
-    basement: "#070910",
-    basementOpacity80: "#070910cc",
     surface: "#0b0f1a",
-    surfaceOpacity80: "#0b0f1acc",
-    surfaceOpacity0: "#0b0f1a00",
     elevation: "#131f2f",
-    elevation1: "#17273a",
-    elevation2: "#192f43",
-    elevation3: "#21374a",
     elevation4: "#4c5d72",
   },
   status: {
@@ -45,8 +39,8 @@ export const semantic = {
     focus: "#f0f4f7",
     secondary: "#131f2f",
     disable: "#070910",
-    buy: "#48aa5c",
-    sell: "#b32b31",
+    buy: "#4fa963",
+    sell: "#dc3323",
   },
   text: {
     primary: "#005fae",
@@ -101,33 +95,11 @@ export const semantic = {
   },
   brand: {
     primary: "#005fae",
-    primary10: "#005fae1a",
   },
   inverse: {
     purewhite: "#ffffff",
-    puredark: "#000000",
-    swap: "#000000",
-    focus: "#ffffff",
   },
   actions: {
     action01: "#4fa963",
-    action0120: "#4fa96333",
-    action02: "#e93a40",
-    action0220: "#e93a4033",
-    action03: "#ffac2b",
-    action0320: "#ffac2b33",
-    gradients: {
-      gradient01: "#15ed45",
-      gradient02: "#b32b31",
-    },
-  },
-  debug: {
-    undefined: "#c5ff00",
-  },
-  dedicated: {
-    overlay: "#000000d9",
-  },
-  sectionBg: {
-    undefined: "#000000",
   },
 } as const;

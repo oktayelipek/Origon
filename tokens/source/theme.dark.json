@@ -353,6 +353,10 @@
         "$type": "color"
       },
       "alpha": {
+        "level1Alpha0": {
+          "$value": "#07091000",
+          "$type": "color"
+        },
         "level1Alpha80": {
           "$value": "#070910cc",
           "$type": "color"

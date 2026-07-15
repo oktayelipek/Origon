@@ -16,9 +16,6 @@ class OrigonSemantic {
   static const _OrigonBrand brand = _OrigonBrand();
   static const _OrigonInverse inverse = _OrigonInverse();
   static const _OrigonActions actions = _OrigonActions();
-  static const _OrigonDebug debug = _OrigonDebug();
-  static const _OrigonDedicated dedicated = _OrigonDedicated();
-  static const _OrigonSectionBg sectionBg = _OrigonSectionBg();
 }
 
 class _OrigonLevel {
@@ -30,15 +27,8 @@ class _OrigonLevel {
   Color get level4 => Color(0xFF192F43);
   Color get level5 => Color(0xFF21374A);
   Color get level6 => Color(0xFF4C5D72);
-  Color get basement => Color(0xFF070910);
-  Color get basementOpacity80 => Color(0xFF070910CC);
   Color get surface => Color(0xFF0B0F1A);
-  Color get surfaceOpacity80 => Color(0xFF0B0F1ACC);
-  Color get surfaceOpacity0 => Color(0xFF0B0F1A00);
   Color get elevation => Color(0xFF131F2F);
-  Color get elevation1 => Color(0xFF17273A);
-  Color get elevation2 => Color(0xFF192F43);
-  Color get elevation3 => Color(0xFF21374A);
   Color get elevation4 => Color(0xFF4C5D72);
 }
 
@@ -59,8 +49,8 @@ class _OrigonButton {
   Color get focus => Color(0xFFF0F4F7);
   Color get secondary => Color(0xFF131F2F);
   Color get disable => Color(0xFF070910);
-  Color get buy => Color(0xFF48AA5C);
-  Color get sell => Color(0xFFB32B31);
+  Color get buy => Color(0xFF4FA963);
+  Color get sell => Color(0xFFDC3323);
 }
 
 class _OrigonText {
@@ -114,38 +104,14 @@ class _OrigonBorder {
 class _OrigonBrand {
   const _OrigonBrand();
   Color get primary => Color(0xFF005FAE);
-  Color get primary10 => Color(0xFF005FAE1A);
 }
 
 class _OrigonInverse {
   const _OrigonInverse();
   Color get purewhite => Color(0xFFFFFFFF);
-  Color get puredark => Color(0xFF000000);
-  Color get swap => Color(0xFF000000);
-  Color get focus => Color(0xFFFFFFFF);
 }
 
 class _OrigonActions {
   const _OrigonActions();
   Color get action01 => Color(0xFF4FA963);
-  Color get action0120 => Color(0xFF4FA96333);
-  Color get action02 => Color(0xFFE93A40);
-  Color get action0220 => Color(0xFFE93A4033);
-  Color get action03 => Color(0xFFFFAC2B);
-  Color get action0320 => Color(0xFFFFAC2B33);
-}
-
-class _OrigonDebug {
-  const _OrigonDebug();
-  Color get undefined => Color(0xFFC5FF00);
-}
-
-class _OrigonDedicated {
-  const _OrigonDedicated();
-  Color get overlay => Color(0xFF000000D9);
-}
-
-class _OrigonSectionBg {
-  const _OrigonSectionBg();
-  Color get undefined => Color(0xFF000000);
 }

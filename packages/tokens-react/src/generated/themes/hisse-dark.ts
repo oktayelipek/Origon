@@ -383,17 +383,11 @@ export const tokens = {
     level5: "#21374a",
     level6: "#4c5d72",
     alpha: {
+      level1Alpha0: "#07091000",
       level1Alpha80: "#070910cc",
     },
-    basement: "#050a0a",
-    basementOpacity80: "#050a0acc",
     surface: "#070d0d",
-    surfaceOpacity80: "#070d0dcc",
-    surfaceOpacity0: "#070d0d00",
     elevation: "#0f1d1d",
-    elevation1: "#152a29",
-    elevation2: "#193433",
-    elevation3: "#1c3c3b",
     elevation4: "#245956",
   },
   status: {
@@ -418,8 +412,8 @@ export const tokens = {
     focus: "#f0f4f7",
     secondary: "#131f2f",
     disable: "#070910",
-    buy: "#6a992c",
-    sell: "#ad403e",
+    buy: "#4fa963",
+    sell: "#dc3323",
   },
   text: {
     primary: "#005fae",
@@ -474,34 +468,12 @@ export const tokens = {
   },
   brand: {
     primary: "#07ac92",
-    primary10: "#07ac921a",
   },
   inverse: {
     purewhite: "#ffffff",
-    puredark: "#000000",
-    swap: "#000000",
-    focus: "#ffffff",
   },
   actions: {
     action01: "#6a992c",
-    action0120: "#6a992c33",
-    action02: "#ad403e",
-    action0220: "#ad403e33",
-    action03: "#ffac2b",
-    action0320: "#ffac2b33",
-    gradients: {
-      gradient01: "#4fed15",
-      gradient02: "#cf363c",
-    },
-  },
-  debug: {
-    undefined: "#c5ff00",
-  },
-  dedicated: {
-    overlay: "#000000d9",
-  },
-  sectionBg: {
-    undefined: "#000000",
   },
 },
   spacing: {

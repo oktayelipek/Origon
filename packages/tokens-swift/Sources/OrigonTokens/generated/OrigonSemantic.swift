@@ -13,15 +13,8 @@ public enum OrigonSemantic {
         public static let level4 = Color(hex: 0x192F43)
         public static let level5 = Color(hex: 0x21374A)
         public static let level6 = Color(hex: 0x4C5D72)
-        public static let basement = Color(hex: 0x070910)
-        public static let basementOpacity80 = Color(hex: 0x070910CC)
         public static let surface = Color(hex: 0x0B0F1A)
-        public static let surfaceOpacity80 = Color(hex: 0x0B0F1ACC)
-        public static let surfaceOpacity0 = Color(hex: 0x0B0F1A00)
         public static let elevation = Color(hex: 0x131F2F)
-        public static let elevation1 = Color(hex: 0x17273A)
-        public static let elevation2 = Color(hex: 0x192F43)
-        public static let elevation3 = Color(hex: 0x21374A)
         public static let elevation4 = Color(hex: 0x4C5D72)
     }
     public enum Status {
@@ -38,8 +31,8 @@ public enum OrigonSemantic {
         public static let focus = Color(hex: 0xF0F4F7)
         public static let secondary = Color(hex: 0x131F2F)
         public static let disable = Color(hex: 0x070910)
-        public static let buy = Color(hex: 0x48AA5C)
-        public static let sell = Color(hex: 0xB32B31)
+        public static let buy = Color(hex: 0x4FA963)
+        public static let sell = Color(hex: 0xDC3323)
     }
     public enum Text {
         public static let primary = Color(hex: 0x005FAE)
@@ -85,29 +78,11 @@ public enum OrigonSemantic {
     }
     public enum Brand {
         public static let primary = Color(hex: 0x005FAE)
-        public static let primary10 = Color(hex: 0x005FAE1A)
     }
     public enum Inverse {
         public static let purewhite = Color(hex: 0xFFFFFF)
-        public static let puredark = Color(hex: 0x000000)
-        public static let swap = Color(hex: 0x000000)
-        public static let focus = Color(hex: 0xFFFFFF)
     }
     public enum Actions {
         public static let action01 = Color(hex: 0x4FA963)
-        public static let action0120 = Color(hex: 0x4FA96333)
-        public static let action02 = Color(hex: 0xE93A40)
-        public static let action0220 = Color(hex: 0xE93A4033)
-        public static let action03 = Color(hex: 0xFFAC2B)
-        public static let action0320 = Color(hex: 0xFFAC2B33)
-    }
-    public enum Debug {
-        public static let undefined = Color(hex: 0xC5FF00)
-    }
-    public enum Dedicated {
-        public static let overlay = Color(hex: 0x000000D9)
-    }
-    public enum SectionBg {
-        public static let undefined = Color(hex: 0x000000)
     }
 }

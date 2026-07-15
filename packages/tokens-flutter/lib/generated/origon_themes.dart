@@ -14,15 +14,8 @@ class OrigonSemanticLevel {
   final Color level4;
   final Color level5;
   final Color level6;
-  final Color basement;
-  final Color basementOpacity80;
   final Color surface;
-  final Color surfaceOpacity80;
-  final Color surfaceOpacity0;
   final Color elevation;
-  final Color elevation1;
-  final Color elevation2;
-  final Color elevation3;
   final Color elevation4;
 
   const OrigonSemanticLevel({
@@ -33,15 +26,8 @@ class OrigonSemanticLevel {
     required this.level4,
     required this.level5,
     required this.level6,
-    required this.basement,
-    required this.basementOpacity80,
     required this.surface,
-    required this.surfaceOpacity80,
-    required this.surfaceOpacity0,
     required this.elevation,
-    required this.elevation1,
-    required this.elevation2,
-    required this.elevation3,
     required this.elevation4,
   });
 }
@@ -176,67 +162,25 @@ class OrigonSemanticBorder {
 
 class OrigonSemanticBrand {
   final Color primary;
-  final Color primary10;
 
   const OrigonSemanticBrand({
     required this.primary,
-    required this.primary10,
   });
 }
 
 class OrigonSemanticInverse {
   final Color purewhite;
-  final Color puredark;
-  final Color swap;
-  final Color focus;
 
   const OrigonSemanticInverse({
     required this.purewhite,
-    required this.puredark,
-    required this.swap,
-    required this.focus,
   });
 }
 
 class OrigonSemanticActions {
   final Color action01;
-  final Color action0120;
-  final Color action02;
-  final Color action0220;
-  final Color action03;
-  final Color action0320;
 
   const OrigonSemanticActions({
     required this.action01,
-    required this.action0120,
-    required this.action02,
-    required this.action0220,
-    required this.action03,
-    required this.action0320,
-  });
-}
-
-class OrigonSemanticDebug {
-  final Color undefined;
-
-  const OrigonSemanticDebug({
-    required this.undefined,
-  });
-}
-
-class OrigonSemanticDedicated {
-  final Color overlay;
-
-  const OrigonSemanticDedicated({
-    required this.overlay,
-  });
-}
-
-class OrigonSemanticSectionBg {
-  final Color undefined;
-
-  const OrigonSemanticSectionBg({
-    required this.undefined,
   });
 }
 
@@ -250,9 +194,6 @@ class OrigonSemanticColors {
   final OrigonSemanticBrand brand;
   final OrigonSemanticInverse inverse;
   final OrigonSemanticActions actions;
-  final OrigonSemanticDebug debug;
-  final OrigonSemanticDedicated dedicated;
-  final OrigonSemanticSectionBg sectionBg;
 
   const OrigonSemanticColors({
     required this.level,
@@ -264,9 +205,6 @@ class OrigonSemanticColors {
     required this.brand,
     required this.inverse,
     required this.actions,
-    required this.debug,
-    required this.dedicated,
-    required this.sectionBg,
   });
 }
 
@@ -289,15 +227,8 @@ const OrigonSemanticColors _kriptoDarkSemantic = OrigonSemanticColors(
     level4: Color(0xFF192F43),
     level5: Color(0xFF21374A),
     level6: Color(0xFF4C5D72),
-    basement: Color(0xFF070910),
-    basementOpacity80: Color(0xFF070910CC),
     surface: Color(0xFF0B0F1A),
-    surfaceOpacity80: Color(0xFF0B0F1ACC),
-    surfaceOpacity0: Color(0xFF0B0F1A00),
     elevation: Color(0xFF131F2F),
-    elevation1: Color(0xFF17273A),
-    elevation2: Color(0xFF192F43),
-    elevation3: Color(0xFF21374A),
     elevation4: Color(0xFF4C5D72),
   ),
   status: OrigonSemanticStatus(
@@ -314,8 +245,8 @@ const OrigonSemanticColors _kriptoDarkSemantic = OrigonSemanticColors(
     focus: Color(0xFFF0F4F7),
     secondary: Color(0xFF131F2F),
     disable: Color(0xFF070910),
-    buy: Color(0xFF48AA5C),
-    sell: Color(0xFFB32B31),
+    buy: Color(0xFF4FA963),
+    sell: Color(0xFFDC3323),
   ),
   text: OrigonSemanticText(
     primary: Color(0xFF005FAE),
@@ -361,30 +292,12 @@ const OrigonSemanticColors _kriptoDarkSemantic = OrigonSemanticColors(
   ),
   brand: OrigonSemanticBrand(
     primary: Color(0xFF005FAE),
-    primary10: Color(0xFF005FAE1A),
   ),
   inverse: OrigonSemanticInverse(
     purewhite: Color(0xFFFFFFFF),
-    puredark: Color(0xFF000000),
-    swap: Color(0xFF000000),
-    focus: Color(0xFFFFFFFF),
   ),
   actions: OrigonSemanticActions(
     action01: Color(0xFF4FA963),
-    action0120: Color(0xFF4FA96333),
-    action02: Color(0xFFE93A40),
-    action0220: Color(0xFFE93A4033),
-    action03: Color(0xFFFFAC2B),
-    action0320: Color(0xFFFFAC2B33),
-  ),
-  debug: OrigonSemanticDebug(
-    undefined: Color(0xFFC5FF00),
-  ),
-  dedicated: OrigonSemanticDedicated(
-    overlay: Color(0xFF000000D9),
-  ),
-  sectionBg: OrigonSemanticSectionBg(
-    undefined: Color(0xFF000000),
   ),
 );
 
@@ -397,15 +310,8 @@ const OrigonSemanticColors _kriptoLightSemantic = OrigonSemanticColors(
     level4: Color(0xFFE0E0E0),
     level5: Color(0xFFD6D6D6),
     level6: Color(0xFFB0B0B0),
-    basement: Color(0xFFF5F5F5),
-    basementOpacity80: Color(0xFFF5F5F5CC),
     surface: Color(0xFFFFFFFF),
-    surfaceOpacity80: Color(0xFFFFFFFFCC),
-    surfaceOpacity0: Color(0xFFFFFFFF00),
     elevation: Color(0xFFF5F5F5),
-    elevation1: Color(0xFFEBEBEB),
-    elevation2: Color(0xFFE0E0E0),
-    elevation3: Color(0xFFD6D6D6),
     elevation4: Color(0xFFCCCCCC),
   ),
   status: OrigonSemanticStatus(
@@ -422,8 +328,8 @@ const OrigonSemanticColors _kriptoLightSemantic = OrigonSemanticColors(
     focus: Color(0xFF070910),
     secondary: Color(0xFFF5F5F5),
     disable: Color(0xFFF5F5F5),
-    buy: Color(0xFF48AA5C),
-    sell: Color(0xFFDE393F),
+    buy: Color(0xFF4FA963),
+    sell: Color(0xFFDC3323),
   ),
   text: OrigonSemanticText(
     primary: Color(0xFF005FAE),
@@ -469,30 +375,12 @@ const OrigonSemanticColors _kriptoLightSemantic = OrigonSemanticColors(
   ),
   brand: OrigonSemanticBrand(
     primary: Color(0xFF005FAE),
-    primary10: Color(0xFF005FAE1A),
   ),
   inverse: OrigonSemanticInverse(
     purewhite: Color(0xFFFFFFFF),
-    puredark: Color(0xFF000000),
-    swap: Color(0xFFFFFFFF),
-    focus: Color(0xFF000000),
   ),
   actions: OrigonSemanticActions(
     action01: Color(0xFF4BA22D),
-    action0120: Color(0xFF4BA22D33),
-    action02: Color(0xFFDC3323),
-    action0220: Color(0xFFDC332333),
-    action03: Color(0xFFDB8500),
-    action0320: Color(0xFFDB850033),
-  ),
-  debug: OrigonSemanticDebug(
-    undefined: Color(0xFF0064FF),
-  ),
-  dedicated: OrigonSemanticDedicated(
-    overlay: Color(0xFF000000BF),
-  ),
-  sectionBg: OrigonSemanticSectionBg(
-    undefined: Color(0xFFE8E8E8),
   ),
 );
 
@@ -505,15 +393,8 @@ const OrigonSemanticColors _hisseDarkSemantic = OrigonSemanticColors(
     level4: Color(0xFF192F43),
     level5: Color(0xFF21374A),
     level6: Color(0xFF4C5D72),
-    basement: Color(0xFF050A0A),
-    basementOpacity80: Color(0xFF050A0ACC),
     surface: Color(0xFF070D0D),
-    surfaceOpacity80: Color(0xFF070D0DCC),
-    surfaceOpacity0: Color(0xFF070D0D00),
     elevation: Color(0xFF0F1D1D),
-    elevation1: Color(0xFF152A29),
-    elevation2: Color(0xFF193433),
-    elevation3: Color(0xFF1C3C3B),
     elevation4: Color(0xFF245956),
   ),
   status: OrigonSemanticStatus(
@@ -530,8 +411,8 @@ const OrigonSemanticColors _hisseDarkSemantic = OrigonSemanticColors(
     focus: Color(0xFFF0F4F7),
     secondary: Color(0xFF131F2F),
     disable: Color(0xFF070910),
-    buy: Color(0xFF6A992C),
-    sell: Color(0xFFAD403E),
+    buy: Color(0xFF4FA963),
+    sell: Color(0xFFDC3323),
   ),
   text: OrigonSemanticText(
     primary: Color(0xFF005FAE),
@@ -577,30 +458,12 @@ const OrigonSemanticColors _hisseDarkSemantic = OrigonSemanticColors(
   ),
   brand: OrigonSemanticBrand(
     primary: Color(0xFF07AC92),
-    primary10: Color(0xFF07AC921A),
   ),
   inverse: OrigonSemanticInverse(
     purewhite: Color(0xFFFFFFFF),
-    puredark: Color(0xFF000000),
-    swap: Color(0xFF000000),
-    focus: Color(0xFFFFFFFF),
   ),
   actions: OrigonSemanticActions(
     action01: Color(0xFF6A992C),
-    action0120: Color(0xFF6A992C33),
-    action02: Color(0xFFAD403E),
-    action0220: Color(0xFFAD403E33),
-    action03: Color(0xFFFFAC2B),
-    action0320: Color(0xFFFFAC2B33),
-  ),
-  debug: OrigonSemanticDebug(
-    undefined: Color(0xFFC5FF00),
-  ),
-  dedicated: OrigonSemanticDedicated(
-    overlay: Color(0xFF000000D9),
-  ),
-  sectionBg: OrigonSemanticSectionBg(
-    undefined: Color(0xFF000000),
   ),
 );
 
@@ -613,15 +476,8 @@ const OrigonSemanticColors _hisseLightSemantic = OrigonSemanticColors(
     level4: Color(0xFFE0E0E0),
     level5: Color(0xFFD6D6D6),
     level6: Color(0xFFB0B0B0),
-    basement: Color(0xFFF5F5F5),
-    basementOpacity80: Color(0xFFF5F5F5CC),
     surface: Color(0xFFFFFFFF),
-    surfaceOpacity80: Color(0xFFFFFFFFCC),
-    surfaceOpacity0: Color(0xFFFFFFFF00),
     elevation: Color(0xFFF5F5F5),
-    elevation1: Color(0xFFEBEBEB),
-    elevation2: Color(0xFFE0E0E0),
-    elevation3: Color(0xFFD6D6D6),
     elevation4: Color(0xFFCCCCCC),
   ),
   status: OrigonSemanticStatus(
@@ -638,7 +494,7 @@ const OrigonSemanticColors _hisseLightSemantic = OrigonSemanticColors(
     focus: Color(0xFF070910),
     secondary: Color(0xFFF5F5F5),
     disable: Color(0xFFF5F5F5),
-    buy: Color(0xFF4BA22D),
+    buy: Color(0xFF4FA963),
     sell: Color(0xFFDC3323),
   ),
   text: OrigonSemanticText(
@@ -685,30 +541,12 @@ const OrigonSemanticColors _hisseLightSemantic = OrigonSemanticColors(
   ),
   brand: OrigonSemanticBrand(
     primary: Color(0xFF07AC92),
-    primary10: Color(0xFF07AC921A),
   ),
   inverse: OrigonSemanticInverse(
     purewhite: Color(0xFFFFFFFF),
-    puredark: Color(0xFF000000),
-    swap: Color(0xFFFFFFFF),
-    focus: Color(0xFF000000),
   ),
   actions: OrigonSemanticActions(
     action01: Color(0xFF4BA22D),
-    action0120: Color(0xFF4BA22D33),
-    action02: Color(0xFFDC3323),
-    action0220: Color(0xFFDC332333),
-    action03: Color(0xFFDB8500),
-    action0320: Color(0xFFDB850033),
-  ),
-  debug: OrigonSemanticDebug(
-    undefined: Color(0xFF0064FF),
-  ),
-  dedicated: OrigonSemanticDedicated(
-    overlay: Color(0xFF000000BF),
-  ),
-  sectionBg: OrigonSemanticSectionBg(
-    undefined: Color(0xFFE8E8E8),
   ),
 );
 
@@ -721,15 +559,8 @@ const OrigonSemanticColors _globalDarkSemantic = OrigonSemanticColors(
     level4: Color(0xFF192F43),
     level5: Color(0xFF21374A),
     level6: Color(0xFF4C5D72),
-    basement: Color(0xFF070910),
-    basementOpacity80: Color(0xFF070910CC),
     surface: Color(0xFF0B0F1A),
-    surfaceOpacity80: Color(0xFF0B0F1ACC),
-    surfaceOpacity0: Color(0xFF0B0F1A00),
     elevation: Color(0xFF131F2F),
-    elevation1: Color(0xFF17273A),
-    elevation2: Color(0xFF192F43),
-    elevation3: Color(0xFF21374A),
     elevation4: Color(0xFF4C5D72),
   ),
   status: OrigonSemanticStatus(
@@ -746,8 +577,8 @@ const OrigonSemanticColors _globalDarkSemantic = OrigonSemanticColors(
     focus: Color(0xFFF0F4F7),
     secondary: Color(0xFF131F2F),
     disable: Color(0xFF070910),
-    buy: Color(0xFF48AA5C),
-    sell: Color(0xFFB32B31),
+    buy: Color(0xFF4FA963),
+    sell: Color(0xFFDC3323),
   ),
   text: OrigonSemanticText(
     primary: Color(0xFF005FAE),
@@ -793,30 +624,12 @@ const OrigonSemanticColors _globalDarkSemantic = OrigonSemanticColors(
   ),
   brand: OrigonSemanticBrand(
     primary: Color(0xFF005FAE),
-    primary10: Color(0xFF005FAE1A),
   ),
   inverse: OrigonSemanticInverse(
     purewhite: Color(0xFFFFFFFF),
-    puredark: Color(0xFF000000),
-    swap: Color(0xFF000000),
-    focus: Color(0xFFFFFFFF),
   ),
   actions: OrigonSemanticActions(
     action01: Color(0xFF4FA963),
-    action0120: Color(0xFF4FA96333),
-    action02: Color(0xFFE93A40),
-    action0220: Color(0xFFE93A4033),
-    action03: Color(0xFFFFAC2B),
-    action0320: Color(0xFFFFAC2B33),
-  ),
-  debug: OrigonSemanticDebug(
-    undefined: Color(0xFFC5FF00),
-  ),
-  dedicated: OrigonSemanticDedicated(
-    overlay: Color(0xFF000000D9),
-  ),
-  sectionBg: OrigonSemanticSectionBg(
-    undefined: Color(0xFF000000),
   ),
 );
 
@@ -829,15 +642,8 @@ const OrigonSemanticColors _globalLightSemantic = OrigonSemanticColors(
     level4: Color(0xFFE0E0E0),
     level5: Color(0xFFD6D6D6),
     level6: Color(0xFFB0B0B0),
-    basement: Color(0xFFF5F5F5),
-    basementOpacity80: Color(0xFFF5F5F5CC),
     surface: Color(0xFFFFFFFF),
-    surfaceOpacity80: Color(0xFFFFFFFFCC),
-    surfaceOpacity0: Color(0xFFFFFFFF00),
     elevation: Color(0xFFF5F5F5),
-    elevation1: Color(0xFFEBEBEB),
-    elevation2: Color(0xFFE0E0E0),
-    elevation3: Color(0xFFD6D6D6),
     elevation4: Color(0xFFCCCCCC),
   ),
   status: OrigonSemanticStatus(
@@ -854,8 +660,8 @@ const OrigonSemanticColors _globalLightSemantic = OrigonSemanticColors(
     focus: Color(0xFF070910),
     secondary: Color(0xFFF5F5F5),
     disable: Color(0xFFF5F5F5),
-    buy: Color(0xFF48AA5C),
-    sell: Color(0xFFDE393F),
+    buy: Color(0xFF4FA963),
+    sell: Color(0xFFDC3323),
   ),
   text: OrigonSemanticText(
     primary: Color(0xFF005FAE),
@@ -901,30 +707,12 @@ const OrigonSemanticColors _globalLightSemantic = OrigonSemanticColors(
   ),
   brand: OrigonSemanticBrand(
     primary: Color(0xFF005FAE),
-    primary10: Color(0xFF005FAE1A),
   ),
   inverse: OrigonSemanticInverse(
     purewhite: Color(0xFFFFFFFF),
-    puredark: Color(0xFF000000),
-    swap: Color(0xFFFFFFFF),
-    focus: Color(0xFF000000),
   ),
   actions: OrigonSemanticActions(
     action01: Color(0xFF4BA22D),
-    action0120: Color(0xFF4BA22D33),
-    action02: Color(0xFFDC3323),
-    action0220: Color(0xFFDC332333),
-    action03: Color(0xFFDB8500),
-    action0320: Color(0xFFDB850033),
-  ),
-  debug: OrigonSemanticDebug(
-    undefined: Color(0xFF0064FF),
-  ),
-  dedicated: OrigonSemanticDedicated(
-    overlay: Color(0xFF000000BF),
-  ),
-  sectionBg: OrigonSemanticSectionBg(
-    undefined: Color(0xFFE8E8E8),
   ),
 );
 

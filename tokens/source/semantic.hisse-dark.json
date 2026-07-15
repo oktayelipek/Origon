@@ -30,40 +30,12 @@
       }
     },
     "level": {
-      "basement": {
-        "$value": "#050a0a",
-        "$type": "color"
-      },
-      "basementOpacity80": {
-        "$value": "#050a0acc",
-        "$type": "color"
-      },
       "surface": {
         "$value": "#070d0d",
         "$type": "color"
       },
-      "surfaceOpacity80": {
-        "$value": "#070d0dcc",
-        "$type": "color"
-      },
-      "surfaceOpacity0": {
-        "$value": "#070d0d00",
-        "$type": "color"
-      },
       "elevation": {
         "$value": "#0f1d1d",
-        "$type": "color"
-      },
-      "elevation1": {
-        "$value": "#152a29",
-        "$type": "color"
-      },
-      "elevation2": {
-        "$value": "#193433",
-        "$type": "color"
-      },
-      "elevation3": {
-        "$value": "#1c3c3b",
         "$type": "color"
       },
       "elevation4": {
@@ -75,26 +47,10 @@
       "primary": {
         "$value": "#07ac92",
         "$type": "color"
-      },
-      "primary10": {
-        "$value": "#07ac921a",
-        "$type": "color"
       }
     },
     "inverse": {
       "purewhite": {
-        "$value": "#ffffff",
-        "$type": "color"
-      },
-      "puredark": {
-        "$value": "#000000",
-        "$type": "color"
-      },
-      "swap": {
-        "$value": "#000000",
-        "$type": "color"
-      },
-      "focus": {
         "$value": "#ffffff",
         "$type": "color"
       }
@@ -102,64 +58,6 @@
     "actions": {
       "action01": {
         "$value": "#6a992c",
-        "$type": "color"
-      },
-      "action0120": {
-        "$value": "#6a992c33",
-        "$type": "color"
-      },
-      "action02": {
-        "$value": "#ad403e",
-        "$type": "color"
-      },
-      "action0220": {
-        "$value": "#ad403e33",
-        "$type": "color"
-      },
-      "action03": {
-        "$value": "#ffac2b",
-        "$type": "color"
-      },
-      "action0320": {
-        "$value": "#ffac2b33",
-        "$type": "color"
-      },
-      "gradients": {
-        "gradient01": {
-          "$value": "#4fed15",
-          "$type": "color"
-        },
-        "gradient02": {
-          "$value": "#cf363c",
-          "$type": "color"
-        }
-      }
-    },
-    "button": {
-      "buy": {
-        "$value": "#6a992c",
-        "$type": "color"
-      },
-      "sell": {
-        "$value": "#ad403e",
-        "$type": "color"
-      }
-    },
-    "debug": {
-      "undefined": {
-        "$value": "#c5ff00",
-        "$type": "color"
-      }
-    },
-    "dedicated": {
-      "overlay": {
-        "$value": "#000000d9",
-        "$type": "color"
-      }
-    },
-    "sectionBg": {
-      "undefined": {
-        "$value": "#000000",
         "$type": "color"
       }
     }

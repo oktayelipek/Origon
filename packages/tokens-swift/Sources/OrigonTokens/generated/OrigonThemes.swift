@@ -13,18 +13,11 @@ public struct OrigonSemanticLevel {
     public let level4: Color
     public let level5: Color
     public let level6: Color
-    public let basement: Color
-    public let basementOpacity80: Color
     public let surface: Color
-    public let surfaceOpacity80: Color
-    public let surfaceOpacity0: Color
     public let elevation: Color
-    public let elevation1: Color
-    public let elevation2: Color
-    public let elevation3: Color
     public let elevation4: Color
 
-    public init(level0: Color, level1: Color, level2: Color, level3: Color, level4: Color, level5: Color, level6: Color, basement: Color, basementOpacity80: Color, surface: Color, surfaceOpacity80: Color, surfaceOpacity0: Color, elevation: Color, elevation1: Color, elevation2: Color, elevation3: Color, elevation4: Color) {
+    public init(level0: Color, level1: Color, level2: Color, level3: Color, level4: Color, level5: Color, level6: Color, surface: Color, elevation: Color, elevation4: Color) {
         self.level0 = level0
         self.level1 = level1
         self.level2 = level2
@@ -32,15 +25,8 @@ public struct OrigonSemanticLevel {
         self.level4 = level4
         self.level5 = level5
         self.level6 = level6
-        self.basement = basement
-        self.basementOpacity80 = basementOpacity80
         self.surface = surface
-        self.surfaceOpacity80 = surfaceOpacity80
-        self.surfaceOpacity0 = surfaceOpacity0
         self.elevation = elevation
-        self.elevation1 = elevation1
-        self.elevation2 = elevation2
-        self.elevation3 = elevation3
         self.elevation4 = elevation4
     }
 }
@@ -175,67 +161,25 @@ public struct OrigonSemanticBorder {
 
 public struct OrigonSemanticBrand {
     public let primary: Color
-    public let primary10: Color
 
-    public init(primary: Color, primary10: Color) {
+    public init(primary: Color) {
         self.primary = primary
-        self.primary10 = primary10
     }
 }
 
 public struct OrigonSemanticInverse {
     public let purewhite: Color
-    public let puredark: Color
-    public let swap: Color
-    public let focus: Color
 
-    public init(purewhite: Color, puredark: Color, swap: Color, focus: Color) {
+    public init(purewhite: Color) {
         self.purewhite = purewhite
-        self.puredark = puredark
-        self.swap = swap
-        self.focus = focus
     }
 }
 
 public struct OrigonSemanticActions {
     public let action01: Color
-    public let action0120: Color
-    public let action02: Color
-    public let action0220: Color
-    public let action03: Color
-    public let action0320: Color
 
-    public init(action01: Color, action0120: Color, action02: Color, action0220: Color, action03: Color, action0320: Color) {
+    public init(action01: Color) {
         self.action01 = action01
-        self.action0120 = action0120
-        self.action02 = action02
-        self.action0220 = action0220
-        self.action03 = action03
-        self.action0320 = action0320
-    }
-}
-
-public struct OrigonSemanticDebug {
-    public let undefined: Color
-
-    public init(undefined: Color) {
-        self.undefined = undefined
-    }
-}
-
-public struct OrigonSemanticDedicated {
-    public let overlay: Color
-
-    public init(overlay: Color) {
-        self.overlay = overlay
-    }
-}
-
-public struct OrigonSemanticSectionBg {
-    public let undefined: Color
-
-    public init(undefined: Color) {
-        self.undefined = undefined
     }
 }
 
@@ -249,11 +193,8 @@ public struct OrigonSemanticColors {
     public let brand: OrigonSemanticBrand
     public let inverse: OrigonSemanticInverse
     public let actions: OrigonSemanticActions
-    public let debug: OrigonSemanticDebug
-    public let dedicated: OrigonSemanticDedicated
-    public let sectionBg: OrigonSemanticSectionBg
 
-    public init(level: OrigonSemanticLevel, status: OrigonSemanticStatus, button: OrigonSemanticButton, text: OrigonSemanticText, icon: OrigonSemanticIcon, border: OrigonSemanticBorder, brand: OrigonSemanticBrand, inverse: OrigonSemanticInverse, actions: OrigonSemanticActions, debug: OrigonSemanticDebug, dedicated: OrigonSemanticDedicated, sectionBg: OrigonSemanticSectionBg) {
+    public init(level: OrigonSemanticLevel, status: OrigonSemanticStatus, button: OrigonSemanticButton, text: OrigonSemanticText, icon: OrigonSemanticIcon, border: OrigonSemanticBorder, brand: OrigonSemanticBrand, inverse: OrigonSemanticInverse, actions: OrigonSemanticActions) {
         self.level = level
         self.status = status
         self.button = button
@@ -263,9 +204,6 @@ public struct OrigonSemanticColors {
         self.brand = brand
         self.inverse = inverse
         self.actions = actions
-        self.debug = debug
-        self.dedicated = dedicated
-        self.sectionBg = sectionBg
     }
 }
 
@@ -286,103 +224,85 @@ public enum OrigonThemes {
     public static let kriptoDark = OrigonThemeData(
         brand: .kripto, mode: .dark,
         semantic: OrigonSemanticColors(
-            level: OrigonSemanticLevel(level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72), basement: Color(hex: 0x070910), basementOpacity80: Color(hex: 0x070910), surface: Color(hex: 0x0B0F1A), surfaceOpacity80: Color(hex: 0x0B0F1A), surfaceOpacity0: Color(hex: 0x0B0F1A), elevation: Color(hex: 0x131F2F), elevation1: Color(hex: 0x17273A), elevation2: Color(hex: 0x192F43), elevation3: Color(hex: 0x21374A), elevation4: Color(hex: 0x4C5D72)),
+            level: OrigonSemanticLevel(level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72), surface: Color(hex: 0x0B0F1A), elevation: Color(hex: 0x131F2F), elevation4: Color(hex: 0x4C5D72)),
             status: OrigonSemanticStatus(success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72)),
-            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x131F2F), disable: Color(hex: 0x070910), buy: Color(hex: 0x48AA5C), sell: Color(hex: 0xB32B31)),
+            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x131F2F), disable: Color(hex: 0x070910), buy: Color(hex: 0x4FA963), sell: Color(hex: 0xDC3323)),
             text: OrigonSemanticText(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72), disable: Color(hex: 0x192F43), reverse: Color(hex: 0x070910), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323)),
             icon: OrigonSemanticIcon(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72), disable: Color(hex: 0x192F43), reverse: Color(hex: 0x070910), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), inactive: Color(hex: 0x858FA6), disabled: Color(hex: 0x4C5D72)),
             border: OrigonSemanticBorder(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72)),
-            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE), primary10: Color(hex: 0x005FAE)),
-            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF), puredark: Color(hex: 0x000000), swap: Color(hex: 0x000000), focus: Color(hex: 0xFFFFFF)),
-            actions: OrigonSemanticActions(action01: Color(hex: 0x4FA963), action0120: Color(hex: 0x4FA963), action02: Color(hex: 0xE93A40), action0220: Color(hex: 0xE93A40), action03: Color(hex: 0xFFAC2B), action0320: Color(hex: 0xFFAC2B)),
-            debug: OrigonSemanticDebug(undefined: Color(hex: 0xC5FF00)),
-            dedicated: OrigonSemanticDedicated(overlay: Color(hex: 0x000000)),
-            sectionBg: OrigonSemanticSectionBg(undefined: Color(hex: 0x000000))
+            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE)),
+            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF)),
+            actions: OrigonSemanticActions(action01: Color(hex: 0x4FA963))
         )
     )
     public static let kriptoLight = OrigonThemeData(
         brand: .kripto, mode: .light,
         semantic: OrigonSemanticColors(
-            level: OrigonSemanticLevel(level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0), basement: Color(hex: 0xF5F5F5), basementOpacity80: Color(hex: 0xF5F5F5), surface: Color(hex: 0xFFFFFF), surfaceOpacity80: Color(hex: 0xFFFFFF), surfaceOpacity0: Color(hex: 0xFFFFFF), elevation: Color(hex: 0xF5F5F5), elevation1: Color(hex: 0xEBEBEB), elevation2: Color(hex: 0xE0E0E0), elevation3: Color(hex: 0xD6D6D6), elevation4: Color(hex: 0xCCCCCC)),
+            level: OrigonSemanticLevel(level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0), surface: Color(hex: 0xFFFFFF), elevation: Color(hex: 0xF5F5F5), elevation4: Color(hex: 0xCCCCCC)),
             status: OrigonSemanticStatus(success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0xB7B7B7)),
-            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0xF5F5F5), disable: Color(hex: 0xF5F5F5), buy: Color(hex: 0x48AA5C), sell: Color(hex: 0xDE393F)),
+            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0xF5F5F5), disable: Color(hex: 0xF5F5F5), buy: Color(hex: 0x4FA963), sell: Color(hex: 0xDC3323)),
             text: OrigonSemanticText(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0xA3A3A3), disable: Color(hex: 0xE0E0E0), reverse: Color(hex: 0xF0F4F7), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323)),
             icon: OrigonSemanticIcon(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0x9F9F9F), disable: Color(hex: 0xE0E0E0), reverse: Color(hex: 0xF0F4F7), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), inactive: Color(hex: 0x707070), disabled: Color(hex: 0xA3A3A3)),
             border: OrigonSemanticBorder(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0)),
-            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE), primary10: Color(hex: 0x005FAE)),
-            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF), puredark: Color(hex: 0x000000), swap: Color(hex: 0xFFFFFF), focus: Color(hex: 0x000000)),
-            actions: OrigonSemanticActions(action01: Color(hex: 0x4BA22D), action0120: Color(hex: 0x4BA22D), action02: Color(hex: 0xDC3323), action0220: Color(hex: 0xDC3323), action03: Color(hex: 0xDB8500), action0320: Color(hex: 0xDB8500)),
-            debug: OrigonSemanticDebug(undefined: Color(hex: 0x0064FF)),
-            dedicated: OrigonSemanticDedicated(overlay: Color(hex: 0x000000)),
-            sectionBg: OrigonSemanticSectionBg(undefined: Color(hex: 0xE8E8E8))
+            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE)),
+            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF)),
+            actions: OrigonSemanticActions(action01: Color(hex: 0x4BA22D))
         )
     )
     public static let hisseDark = OrigonThemeData(
         brand: .hisse, mode: .dark,
         semantic: OrigonSemanticColors(
-            level: OrigonSemanticLevel(level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72), basement: Color(hex: 0x050A0A), basementOpacity80: Color(hex: 0x050A0A), surface: Color(hex: 0x070D0D), surfaceOpacity80: Color(hex: 0x070D0D), surfaceOpacity0: Color(hex: 0x070D0D), elevation: Color(hex: 0x0F1D1D), elevation1: Color(hex: 0x152A29), elevation2: Color(hex: 0x193433), elevation3: Color(hex: 0x1C3C3B), elevation4: Color(hex: 0x245956)),
+            level: OrigonSemanticLevel(level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72), surface: Color(hex: 0x070D0D), elevation: Color(hex: 0x0F1D1D), elevation4: Color(hex: 0x245956)),
             status: OrigonSemanticStatus(success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72)),
-            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x131F2F), disable: Color(hex: 0x070910), buy: Color(hex: 0x6A992C), sell: Color(hex: 0xAD403E)),
+            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x131F2F), disable: Color(hex: 0x070910), buy: Color(hex: 0x4FA963), sell: Color(hex: 0xDC3323)),
             text: OrigonSemanticText(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xE7FEFA), secondary: Color(hex: 0x5D8E89), tertiary: Color(hex: 0x245956), disable: Color(hex: 0x192F43), reverse: Color(hex: 0x070910), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323)),
             icon: OrigonSemanticIcon(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xE7FEFA), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72), disable: Color(hex: 0x192F43), reverse: Color(hex: 0x070910), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), inactive: Color(hex: 0x5D8E89), disabled: Color(hex: 0x245956)),
             border: OrigonSemanticBorder(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72)),
-            brand: OrigonSemanticBrand(primary: Color(hex: 0x07AC92), primary10: Color(hex: 0x07AC92)),
-            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF), puredark: Color(hex: 0x000000), swap: Color(hex: 0x000000), focus: Color(hex: 0xFFFFFF)),
-            actions: OrigonSemanticActions(action01: Color(hex: 0x6A992C), action0120: Color(hex: 0x6A992C), action02: Color(hex: 0xAD403E), action0220: Color(hex: 0xAD403E), action03: Color(hex: 0xFFAC2B), action0320: Color(hex: 0xFFAC2B)),
-            debug: OrigonSemanticDebug(undefined: Color(hex: 0xC5FF00)),
-            dedicated: OrigonSemanticDedicated(overlay: Color(hex: 0x000000)),
-            sectionBg: OrigonSemanticSectionBg(undefined: Color(hex: 0x000000))
+            brand: OrigonSemanticBrand(primary: Color(hex: 0x07AC92)),
+            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF)),
+            actions: OrigonSemanticActions(action01: Color(hex: 0x6A992C))
         )
     )
     public static let hisseLight = OrigonThemeData(
         brand: .hisse, mode: .light,
         semantic: OrigonSemanticColors(
-            level: OrigonSemanticLevel(level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0), basement: Color(hex: 0xF5F5F5), basementOpacity80: Color(hex: 0xF5F5F5), surface: Color(hex: 0xFFFFFF), surfaceOpacity80: Color(hex: 0xFFFFFF), surfaceOpacity0: Color(hex: 0xFFFFFF), elevation: Color(hex: 0xF5F5F5), elevation1: Color(hex: 0xEBEBEB), elevation2: Color(hex: 0xE0E0E0), elevation3: Color(hex: 0xD6D6D6), elevation4: Color(hex: 0xCCCCCC)),
+            level: OrigonSemanticLevel(level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0), surface: Color(hex: 0xFFFFFF), elevation: Color(hex: 0xF5F5F5), elevation4: Color(hex: 0xCCCCCC)),
             status: OrigonSemanticStatus(success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0xB7B7B7)),
-            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0xF5F5F5), disable: Color(hex: 0xF5F5F5), buy: Color(hex: 0x4BA22D), sell: Color(hex: 0xDC3323)),
+            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0xF5F5F5), disable: Color(hex: 0xF5F5F5), buy: Color(hex: 0x4FA963), sell: Color(hex: 0xDC3323)),
             text: OrigonSemanticText(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x0A0A0A), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0xA3A3A3), disable: Color(hex: 0xE0E0E0), reverse: Color(hex: 0xF0F4F7), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323)),
             icon: OrigonSemanticIcon(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x0A0A0A), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0x9F9F9F), disable: Color(hex: 0xE0E0E0), reverse: Color(hex: 0xF0F4F7), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), inactive: Color(hex: 0x707070), disabled: Color(hex: 0xA3A3A3)),
             border: OrigonSemanticBorder(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0)),
-            brand: OrigonSemanticBrand(primary: Color(hex: 0x07AC92), primary10: Color(hex: 0x07AC92)),
-            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF), puredark: Color(hex: 0x000000), swap: Color(hex: 0xFFFFFF), focus: Color(hex: 0x000000)),
-            actions: OrigonSemanticActions(action01: Color(hex: 0x4BA22D), action0120: Color(hex: 0x4BA22D), action02: Color(hex: 0xDC3323), action0220: Color(hex: 0xDC3323), action03: Color(hex: 0xDB8500), action0320: Color(hex: 0xDB8500)),
-            debug: OrigonSemanticDebug(undefined: Color(hex: 0x0064FF)),
-            dedicated: OrigonSemanticDedicated(overlay: Color(hex: 0x000000)),
-            sectionBg: OrigonSemanticSectionBg(undefined: Color(hex: 0xE8E8E8))
+            brand: OrigonSemanticBrand(primary: Color(hex: 0x07AC92)),
+            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF)),
+            actions: OrigonSemanticActions(action01: Color(hex: 0x4BA22D))
         )
     )
     public static let globalDark = OrigonThemeData(
         brand: .global, mode: .dark,
         semantic: OrigonSemanticColors(
-            level: OrigonSemanticLevel(level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72), basement: Color(hex: 0x070910), basementOpacity80: Color(hex: 0x070910), surface: Color(hex: 0x0B0F1A), surfaceOpacity80: Color(hex: 0x0B0F1A), surfaceOpacity0: Color(hex: 0x0B0F1A), elevation: Color(hex: 0x131F2F), elevation1: Color(hex: 0x17273A), elevation2: Color(hex: 0x192F43), elevation3: Color(hex: 0x21374A), elevation4: Color(hex: 0x4C5D72)),
+            level: OrigonSemanticLevel(level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72), surface: Color(hex: 0x0B0F1A), elevation: Color(hex: 0x131F2F), elevation4: Color(hex: 0x4C5D72)),
             status: OrigonSemanticStatus(success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72)),
-            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x131F2F), disable: Color(hex: 0x070910), buy: Color(hex: 0x48AA5C), sell: Color(hex: 0xB32B31)),
+            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x131F2F), disable: Color(hex: 0x070910), buy: Color(hex: 0x4FA963), sell: Color(hex: 0xDC3323)),
             text: OrigonSemanticText(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72), disable: Color(hex: 0x192F43), reverse: Color(hex: 0x070910), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323)),
             icon: OrigonSemanticIcon(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), secondary: Color(hex: 0x858FA6), tertiary: Color(hex: 0x4C5D72), disable: Color(hex: 0x192F43), reverse: Color(hex: 0x070910), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), inactive: Color(hex: 0x858FA6), disabled: Color(hex: 0x4C5D72)),
             border: OrigonSemanticBorder(primary: Color(hex: 0x005FAE), focus: Color(hex: 0xF0F4F7), success: Color(hex: 0x4FA963), warning: Color(hex: 0xF0AE67), danger: Color(hex: 0xDC3323), level0: Color(hex: 0x070910), level1: Color(hex: 0x0B0F1A), level2: Color(hex: 0x131F2F), level3: Color(hex: 0x17273A), level4: Color(hex: 0x192F43), level5: Color(hex: 0x21374A), level6: Color(hex: 0x4C5D72)),
-            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE), primary10: Color(hex: 0x005FAE)),
-            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF), puredark: Color(hex: 0x000000), swap: Color(hex: 0x000000), focus: Color(hex: 0xFFFFFF)),
-            actions: OrigonSemanticActions(action01: Color(hex: 0x4FA963), action0120: Color(hex: 0x4FA963), action02: Color(hex: 0xE93A40), action0220: Color(hex: 0xE93A40), action03: Color(hex: 0xFFAC2B), action0320: Color(hex: 0xFFAC2B)),
-            debug: OrigonSemanticDebug(undefined: Color(hex: 0xC5FF00)),
-            dedicated: OrigonSemanticDedicated(overlay: Color(hex: 0x000000)),
-            sectionBg: OrigonSemanticSectionBg(undefined: Color(hex: 0x000000))
+            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE)),
+            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF)),
+            actions: OrigonSemanticActions(action01: Color(hex: 0x4FA963))
         )
     )
     public static let globalLight = OrigonThemeData(
         brand: .global, mode: .light,
         semantic: OrigonSemanticColors(
-            level: OrigonSemanticLevel(level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0), basement: Color(hex: 0xF5F5F5), basementOpacity80: Color(hex: 0xF5F5F5), surface: Color(hex: 0xFFFFFF), surfaceOpacity80: Color(hex: 0xFFFFFF), surfaceOpacity0: Color(hex: 0xFFFFFF), elevation: Color(hex: 0xF5F5F5), elevation1: Color(hex: 0xEBEBEB), elevation2: Color(hex: 0xE0E0E0), elevation3: Color(hex: 0xD6D6D6), elevation4: Color(hex: 0xCCCCCC)),
+            level: OrigonSemanticLevel(level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0), surface: Color(hex: 0xFFFFFF), elevation: Color(hex: 0xF5F5F5), elevation4: Color(hex: 0xCCCCCC)),
             status: OrigonSemanticStatus(success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0xB7B7B7)),
-            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0xF5F5F5), disable: Color(hex: 0xF5F5F5), buy: Color(hex: 0x48AA5C), sell: Color(hex: 0xDE393F)),
+            button: OrigonSemanticButton(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0xF5F5F5), disable: Color(hex: 0xF5F5F5), buy: Color(hex: 0x4FA963), sell: Color(hex: 0xDC3323)),
             text: OrigonSemanticText(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0xA3A3A3), disable: Color(hex: 0xE0E0E0), reverse: Color(hex: 0xF0F4F7), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323)),
             icon: OrigonSemanticIcon(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), secondary: Color(hex: 0x707070), tertiary: Color(hex: 0x9F9F9F), disable: Color(hex: 0xE0E0E0), reverse: Color(hex: 0xF0F4F7), baseWhite: Color(hex: 0xFFFFFF), baseBlack: Color(hex: 0x000000), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), inactive: Color(hex: 0x707070), disabled: Color(hex: 0xA3A3A3)),
             border: OrigonSemanticBorder(primary: Color(hex: 0x005FAE), focus: Color(hex: 0x070910), success: Color(hex: 0x4FA963), warning: Color(hex: 0xDB8500), danger: Color(hex: 0xDC3323), level0: Color(hex: 0xF5F5F5), level1: Color(hex: 0xFFFFFF), level2: Color(hex: 0xF5F5F5), level3: Color(hex: 0xEBEBEB), level4: Color(hex: 0xE0E0E0), level5: Color(hex: 0xD6D6D6), level6: Color(hex: 0xB0B0B0)),
-            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE), primary10: Color(hex: 0x005FAE)),
-            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF), puredark: Color(hex: 0x000000), swap: Color(hex: 0xFFFFFF), focus: Color(hex: 0x000000)),
-            actions: OrigonSemanticActions(action01: Color(hex: 0x4BA22D), action0120: Color(hex: 0x4BA22D), action02: Color(hex: 0xDC3323), action0220: Color(hex: 0xDC3323), action03: Color(hex: 0xDB8500), action0320: Color(hex: 0xDB8500)),
-            debug: OrigonSemanticDebug(undefined: Color(hex: 0x0064FF)),
-            dedicated: OrigonSemanticDedicated(overlay: Color(hex: 0x000000)),
-            sectionBg: OrigonSemanticSectionBg(undefined: Color(hex: 0xE8E8E8))
+            brand: OrigonSemanticBrand(primary: Color(hex: 0x005FAE)),
+            inverse: OrigonSemanticInverse(purewhite: Color(hex: 0xFFFFFF)),
+            actions: OrigonSemanticActions(action01: Color(hex: 0x4BA22D))
         )
     )
 
